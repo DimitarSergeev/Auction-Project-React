@@ -3,9 +3,11 @@ const express = require('express')
 const {port} = require('./config/env')
 
 const { initializeDatabase} = require('./config/database')
+const routs = require('./routes')
 
 const app = express()
 
+app.use(routs)
 
 initializeDatabase()
     .then(() => {
