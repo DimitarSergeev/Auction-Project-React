@@ -10,7 +10,7 @@ export const Header = () => {
                 <NavLink to='/'
                     
                 >
-                    <img src="images/logo.jpg" alt="" className={styles.logo} />
+                    <img src="/images/logo.jpg" alt="" className={styles.logo} />
                     
                 </NavLink>
             
@@ -43,14 +43,7 @@ export const Header = () => {
                         Login
                     </NavLink>
                 </li>
-                <li className={styles.list}>
-                    <NavLink to='/auth/register'
-                        className={({ isActive }) => (isActive ? styles.active : styles.text)}
-                    >
-                        Register
-                    </NavLink>
-                </li>
-
+          
             </ul>
         </div>
     )

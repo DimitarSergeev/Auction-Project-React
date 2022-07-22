@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.login-page{
+    padding-top: 6%;
+}
+
+.form-box {
+    width: 30%;
+    height: 55vh;
+    position: relative;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+.button-box {
+    width: 50% ;
+    height: 10%;
+    margin: 5% auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #ff61241f;
+    border-radius: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    color: white;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+.toggle-btn a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.input-group-login {
+    left: 15%;
+    top: 35%;
+    position: absolute;
+    width: 70%;
+    transition: 0.5s;
+}
+
+/* .input-group-register {
+    top: 120px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+} */
+
+.input-field {
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid white; 
+    color: white;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    
+}
+
+.input-field::placeholder {
+    color: white;
+    opacity: 0.6
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: #DF0F73;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    margin-top: 15%;
+}
+
+/* .register-redirect {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+} */
+
+.sing-up-button {
+    border: none;
+}
