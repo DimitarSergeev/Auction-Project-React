@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +14,15 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.backGroundImg{
+  width: 100%;
+  height: 100%;
+}
+.main{
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.1)50%, rgba(0, 0, 0, 0.1)50%), url('../public/images/atm.jpg');
+  background-position: center;
+  background-size: cover;
 }
