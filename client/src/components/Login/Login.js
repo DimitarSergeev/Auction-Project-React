@@ -7,13 +7,13 @@ export const Login = () => {
         <div id='login-form' className={styles['login-page']}>
             <div className={styles['form-box']}>
                 <div className={styles['button-box']}>
-                    <button type='button'  className={styles['toggle-btn']}><NavLink to='/auth/login'>Login </NavLink> </button>
-                    <button type='button'  className={styles['toggle-btn']}><NavLink to='/auth/register'>Register </NavLink> </button>
+                    <NavLink className={({isActive})=> isActive ? styles['active-btn'] : styles['toggle-btn']} to='/auth/login'>Login </NavLink>
+                    <NavLink className={({isActive})=> isActive ? styles['active-btn'] : styles['toggle-btn']} to='/auth/register'>Register </NavLink>
                 </div>
-                <form id='login' className={styles['input-group-login']}>
-                    <input type='text' className={styles['input-field']} placeholder='Email'/>
-                    <input type='password' className={styles['input-field']} placeholder='Enter Password'/>
-                   
+                <form className={styles['input-group-login']}>
+                    <input type='text' className={styles['input-field']} placeholder='Email' name='email'/>
+                    <input type='password' className={styles['input-field']} placeholder='Enter Password' name='password'/>
+
                     <button type='submit' className={styles['submit-btn']}>Log in</button>
                 </form>
             </div>
