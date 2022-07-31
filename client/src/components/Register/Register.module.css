@@ -101,7 +101,7 @@
 .checkbox input[type='checkbox'] {
     position: relative;
     width: 6vh;
-    height: 2.3vh;
+    height: 2.2vh;
     -webkit-appearance: none;
     background: white;
     outline: none;
@@ -117,8 +117,8 @@
 .checkbox input[type='checkbox']:before {
     content: '';
     position: absolute;
-    width: 2.3vh;
-    height: 2.3vh;
+    width: 2.2vh;
+    height: 2.2vh;
     border-radius: 20px;
     top: 0;
     left: 0;
@@ -147,4 +147,12 @@
     outline: none;
     border-radius: 30px;
     margin-top: 25%;
+    opacity: 0.7;
+}
+
+.submit-btn:hover{
+    opacity: 1;
+}
+.submit-btn:active{
+    opacity: 0.8;
 }

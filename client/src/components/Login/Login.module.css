@@ -96,6 +96,15 @@
     outline: none;
     border-radius: 30px;
     margin-top: 15%;
+    color: #fff;
+    opacity: 0.7;
+}
+
+.submit-btn:hover{
+    opacity: 1;
+}
+.submit-btn:active{
+    opacity: 0.8;
 }
 
 

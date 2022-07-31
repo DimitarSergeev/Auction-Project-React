@@ -1,9 +1,8 @@
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 import styles from './Register.module.css'
 
 export const Register = () => {
-
     return (
         <div id='login-form' className={styles['register-page']}>
             <div className={styles['form-box']}>
