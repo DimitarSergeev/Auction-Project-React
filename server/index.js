@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 const {port} = require('./config/env')
 
@@ -8,6 +9,7 @@ const routs = require('./routes')
 const app = express()
 const bodyParser = require('body-parser')
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(routs)
 
