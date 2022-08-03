@@ -16,9 +16,9 @@ exports.login = async({email,password})=>{
     }
     let isValid = await bcrypt.compare(password,user.password)
    if (!isValid) {
-    throw new Error({
+    throw {
         message: 'email or password dont match!'
-    })
+    }
    }
   
    return user

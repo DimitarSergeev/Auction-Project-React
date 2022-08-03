@@ -19,3 +19,20 @@ export const register = async (userData) => {
     }
 
 }
+
+export const login = async (userData) =>{
+      const response = await fetch(`${baseUrl}/login`,{
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      })
+      if (response.ok) {
+        const result = await response.json();
+
+        return result;
+    } else {
+        throw { message: 'Email or password dont match' };
+    }
+}

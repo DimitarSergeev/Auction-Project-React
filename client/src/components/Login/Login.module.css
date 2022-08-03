@@ -107,5 +107,15 @@
     opacity: 0.8;
 }
 
+.error {
+    position: relative;
+    padding: 1% 10%;
+    border-radius: 6px;
+    background-color: #fc0202;
+    color: white;
+    display: inline-block;
+}
+
+
 
 
