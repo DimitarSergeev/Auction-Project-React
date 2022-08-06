@@ -86,6 +86,12 @@
     color: white;
     opacity: 0.6
 }
+.input-field:focus {
+    outline: none !important;
+    border-color: #DF0F73;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #fdcdef;
+}
 
 
 .checkbox {

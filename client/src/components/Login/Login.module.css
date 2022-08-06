@@ -57,9 +57,10 @@
 
 
 .input-group-login {
+    all: none;
     left: 15%;
     top: auto;
-    position: absolute;
+    position: relative;
     width: 70%;
     transition: 0.5s;
 }
@@ -77,12 +78,17 @@
     outline: none;
     background: transparent;
     text-align: center;
-    
 }
 
 .input-field::placeholder {
     color: white;
     opacity: 0.6
+}
+.input-field:focus {
+    outline: none !important;
+    border-color: #DF0F73;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #fdcdef;
 }
 
 .submit-btn {

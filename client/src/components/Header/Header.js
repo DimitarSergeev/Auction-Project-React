@@ -1,19 +1,21 @@
 import styles from './Header.module.css'
+import { useContext } from 'react'
 
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext'
 
 export const Header = () => {
-
+    const { userInfo } = useContext(AuthContext)
     return (
         <div className={styles.navigation}>
-            
-                <NavLink to='/'
-                    
-                >
-                    <img src="/images/logo.jpg" alt="" className={styles.logo} />
-                    
-                </NavLink>
-            
+
+            <NavLink to='/'
+
+            >
+                <img src="/images/logo.jpg" alt="Logo" className={styles.logo} />
+
+            </NavLink>
+
             <ul>
                 <li className={styles.list}>
                     <NavLink to='/'
@@ -36,14 +38,36 @@ export const Header = () => {
                         About
                     </NavLink>
                 </li>
-                <li className={styles.list}>
-                    <NavLink to='/auth/login'
-                        className={({ isActive }) => (isActive ? styles.active : styles.text)}
-                    >
-                        Login
-                    </NavLink>
-                </li>
-          
+                {userInfo.token
+                    ? <>
+                        <li className={styles.list}>
+                            <NavLink to='/create'
+                                className={({ isActive }) => (isActive ? styles.active : styles.text)}
+                            >
+                                Offer
+                            </NavLink>
+                        </li>
+                        <li className={styles.list}>
+                            <NavLink to='/auth/logout'
+                                className={({ isActive }) => (isActive ? styles.active : styles.text)}
+                            >
+                                Logout
+                            </NavLink>
+                        </li>
+                    </>
+                    : <>
+                        <li className={styles.list}>
+                            <NavLink to='/auth/login'
+                                className={({ isActive }) => (isActive ? styles.active : styles.text)}
+                            >
+                                Login
+                            </NavLink>
+                        </li>
+
+                    </>
+                }
+
+
             </ul>
         </div>
     )
