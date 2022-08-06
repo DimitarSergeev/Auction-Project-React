@@ -10,10 +10,10 @@ export const Create = () => {
                 <form className={styles['input-group-create']}>
                     <input type='text' className={styles['input-field']} placeholder='Title' name='title' />
                     <input type='text' className={styles['input-field']} placeholder='imageUrl' name='imageUrl' />
-                    <input type='number' className={styles['input-field']} placeholder='Created on' name='imageUrl' />
-                    <div className={styles.price}>
-                        <input type="number" className={styles['input-field-price']} placeholder="Starting price?" />
-                        <input type="number" className={styles['input-field-price']} placeholder="Buy now?" />
+                    <div className={styles.number}>
+                        <input type='number' className={styles['input-field-number']} placeholder='Created on' name='createOn' />
+                        <input type="number" className={styles['input-field-number']} placeholder="Starting price?" />
+                        <input type="number" className={styles['input-field-number']} placeholder="Buy now?" />
                     </div>
 
                     <div className={styles.description}>
