@@ -41,7 +41,7 @@ export const Header = () => {
                 {userInfo.token
                     ? <>
                         <li className={styles.list}>
-                            <NavLink to='/create'
+                            <NavLink to='/auction/create'
                                 className={({ isActive }) => (isActive ? styles.active : styles.text)}
                             >
                                 Offer
