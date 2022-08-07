@@ -4,7 +4,7 @@ const authController = require('./controllers/authController')
 const auctionController = require('./controllers/auctionController')
 
 router.use('/auth',authController)
-router.use('/auction', auctionController)
+router.use( auctionController)
 
 
 module.exports = router

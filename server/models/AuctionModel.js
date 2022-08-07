@@ -11,15 +11,15 @@ const auctionSchema = mongoose.Schema({
         required : [true, 'Image url is required'],
         validate: [/^https?/, 'Image need start with http/s']
     },
-    createdOn: {
+    createOn: {
         type: Number,
         required: [true, 'The year of production is mandatory'],
-        min: [0, 'Year of creation can not be less thah 0']
+        min: [1, 'Year of creation can not be less thah 0']
     },
     startPrice: {
         type: Number,
         required: [true, 'The product must have a price'],
-        min: [100, 'Min buyNow price is 100$']
+        min: [100, 'Min start price is 100$']
     },
     buyNow: {
         type: Number,
@@ -28,7 +28,7 @@ const auctionSchema = mongoose.Schema({
     description:{
         type: String,
         required: [true, 'Product must have a description!'],
-        minlength: [10, 'Product need be min 10 charter length']
+        minlength: [10, 'Product description need be min 10 charter length']
     },
     certificate: {
         type: String,
@@ -36,7 +36,7 @@ const auctionSchema = mongoose.Schema({
     },
     nameCert: {
         type: String,
-        minlength: [5, 'Type of certificate need be min 5 charter length'],
+        required: false,
     }
 })
 

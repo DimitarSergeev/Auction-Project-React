@@ -3,9 +3,15 @@ const router = require('express').Router()
 
 const auctionService = require('../services/auctionService')
 
-router.post('/create',async(req,res)=>{
+router.post('/offer/create',async(req,res)=>{
+    let data = req.body
+    if (req.body.certificate === "No" && req.body.nameCert) {
+        const {nameCert,...corectData} = req.body
+        data = corectData
+    }
+
     try {
-        const auctionOffer = await auctionService.createOffer(req.body)
+        const auctionOffer = await auctionService.createOffer(data)
         return res.json(auctionOffer)
     } catch (error) {
          res.status(400)

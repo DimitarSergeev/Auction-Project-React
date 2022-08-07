@@ -25,7 +25,7 @@ export const Header = () => {
                     </NavLink>
                 </li>
                 <li className={styles.list}>
-                    <NavLink to='/auction'
+                    <NavLink to='/auction' 
                         className={({ isActive }) => (isActive ? styles.active : styles.text)}
                     >
                         Auction
@@ -41,7 +41,7 @@ export const Header = () => {
                 {userInfo.token
                     ? <>
                         <li className={styles.list}>
-                            <NavLink to='/auction/create'
+                            <NavLink to='/offer/create' 
                                 className={({ isActive }) => (isActive ? styles.active : styles.text)}
                             >
                                 Offer

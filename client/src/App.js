@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route path='/auth/register' element={<Register />} />
             <Route path='/auth/login' element={<Login />} />
-            <Route path='/create' element={<Create />} />
+            <Route path='/offer/create'  element={<Create />} />
           </Routes>
         </main>
         <Footer />
