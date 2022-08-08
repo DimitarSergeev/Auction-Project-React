@@ -9,6 +9,9 @@ import { Footer } from './components/Footer/Footer'
 import { Register } from './components/Register/Register'
 import { Login } from './components/Login/Login'
 import { Create} from './components/create/Create'
+import { Logout } from './components/Logout'
+
+
 
 function App() {
   const [userInfo, setUserInfo] = useLocalStorage('userInfo', {});
@@ -19,8 +22,8 @@ function App() {
 
   const userLogout = () => {
     setUserInfo({});
+    console.log(userInfo);
   };
-
 
   return (
     <AuthContext.Provider value={{ userInfo, userLogin, userLogout }}>
@@ -32,6 +35,7 @@ function App() {
             <Route path='/auth/register' element={<Register />} />
             <Route path='/auth/login' element={<Login />} />
             <Route path='/offer/create'  element={<Create />} />
+            <Route path='/auth/logout' element={<Logout />}/>
           </Routes>
         </main>
         <Footer />

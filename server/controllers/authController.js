@@ -26,9 +26,10 @@ router.post('/login', async (req, res) => {
     return res.json({ error: error.message })
   }
 })
+
 router.get('/logout', (req, res) => {
-  res.clearCookie(sessionName)
-  res.redirect('/')
+  authService.logout(req.headers['x-authorization'])
+  return res.status(204)
 })
 
 module.exports = router

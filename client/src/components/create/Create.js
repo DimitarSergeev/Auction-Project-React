@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState , useContext} from 'react'
 import { useNavigate } from "react-router-dom";
 
 
+import {AuthContext } from '../../contexts/AuthContext'
 import styles from './Create.module.css'
 import * as auctionService from '../../services/auctionService'
 
@@ -16,6 +17,9 @@ export const Create = () => {
         description: '',
         certificate: 'No',
     })
+    
+    
+    const { userInfo } = useContext(AuthContext)
     const navigate = useNavigate()
     const changeHandler = (e) => {
         setData(state => ({
@@ -31,10 +35,11 @@ export const Create = () => {
         
     }
 
+
     const submitHandler = (e) => {
         e.preventDefault()
 
-        auctionService.create(data)
+        auctionService.create(data,userInfo.token)
             .then(() => navigate('/auction'))
             .catch(error => console.log(error))
     }

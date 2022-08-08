@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { secret } = require('../config/env')
+const { secret,blackList } = require('../config/env')
 
 
 const User = require('../models/UserModel')
@@ -43,6 +43,10 @@ exports.register = async ({ email, userName, password, repeatPassword }) => {
 
     return createdUser
 
+}
+exports.logout = (token)=>{
+    blackList.push(token)
+    console.log(blackList);
 }
 
 exports.createToken = (user) => {
