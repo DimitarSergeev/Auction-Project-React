@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 const authService = require('../services/authService')
 const {sessionName} = require('../config/env')
-
+// const tokenHelper = require('../utils/tokenHelper')
 router.post('/register', async (req, res) => {
 
   try {
@@ -29,6 +29,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
   authService.logout(req.headers['x-authorization'])
+  // tokenHelper.clearOldTokens()
   return res.status(204)
 })
 

@@ -51,7 +51,7 @@ exports.logout = (token)=>{
 
 exports.createToken = (user) => {
     const payload = { _id: user._id, email: user.email }
-    const options = { expiresIn: '1d' }
+    const options = { expiresIn: '10s' }
     return new Promise((resolve, reject) => {
         jwt.sign(payload, secret, options, (err, decodedToken) => {
             if (err) {
