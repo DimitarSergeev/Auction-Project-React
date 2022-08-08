@@ -18,3 +18,13 @@ export const create = async (offerData,token) => {
         throw { message: 'Unable to create offer' }
     }
 }
+
+export const getLastOfferts = async ()=>{
+     try {
+        const response = await fetch(baseUrl)
+        const result = await response.json()
+        return result
+     } catch (error) {
+        throw new Error({error: error.message})
+     }
+}

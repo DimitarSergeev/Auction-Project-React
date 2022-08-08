@@ -3,6 +3,12 @@ const router = require('express').Router()
 const tokenHelper = require('../utils/tokenHelper')
 const auctionService = require('../services/auctionService')
 
+router.get('/',async (req,res)=>{
+    const offerts = await auctionService.getAll().lean()
+    const lastTree = offerts.slice(0,3)
+    return res.json(lastTree)
+})
+
 router.post('/offer/create',async(req,res)=>{
     let data = req.body
     if (req.body.certificate === "No" && req.body.nameCert) {
@@ -21,5 +27,6 @@ if (!validToken) {
          return res.json({ error: error.message })
     }
 })
+
 
 module.exports = router

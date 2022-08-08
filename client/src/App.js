@@ -11,7 +11,7 @@ import { Login } from './components/Login/Login'
 import { Create } from './components/create/Create'
 import { Logout } from './components/Logout'
 import { Home } from './components/home/Home'
-
+import { Auction} from './components/auction/Auction'
 
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
             <Route path='/auth/login' element={<Login />} />
             <Route path='/offer/create' element={<Create />} />
             <Route path='/auth/logout' element={<Logout />} />
+            <Route path='/auction' element={<Auction />} />
           </Routes>
         </main>
         <Footer />
