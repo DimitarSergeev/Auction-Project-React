@@ -8,8 +8,9 @@ import { Header } from './components/Header/Header'
 import { Footer } from './components/Footer/Footer'
 import { Register } from './components/Register/Register'
 import { Login } from './components/Login/Login'
-import { Create} from './components/create/Create'
+import { Create } from './components/create/Create'
 import { Logout } from './components/Logout'
+import { Home } from './components/home/Home'
 
 
 
@@ -32,10 +33,11 @@ function App() {
         <Header />
         <main className='main'>
           <Routes>
+            <Route path='/' element={<Home />} />
             <Route path='/auth/register' element={<Register />} />
             <Route path='/auth/login' element={<Login />} />
-            <Route path='/offer/create'  element={<Create />} />
-            <Route path='/auth/logout' element={<Logout />}/>
+            <Route path='/offer/create' element={<Create />} />
+            <Route path='/auth/logout' element={<Logout />} />
           </Routes>
         </main>
         <Footer />
