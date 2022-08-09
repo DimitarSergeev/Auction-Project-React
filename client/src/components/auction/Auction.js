@@ -1,96 +1,76 @@
 import styles from './Auction.module.css'
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import * as auctionService from '../../services/auctionService'
 
+import { AuctionItem } from './AuctionItem';
 export const Auction = () => {
+    const [offerts, setOfferts] = useState([])
+    const [searchValue, setSearchValue] = useState('')
+    const [option, setOption] = useState('')
+    const navigate = useNavigate()
+    useEffect(() => {
 
+        auctionService.getAll()
+            .then(result => {
+                setOfferts(result)
+            })
+            .catch(() => {
+                navigate('/404')
+            })
+
+    }, [])
+
+    let offertsS = offerts.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
+
+
+
+
+    const searchHandler = (e) => {
+        setSearchValue(e.target.value)
+    }
+    const optionHandler = (e) => {
+        setOption(e.target.value)
+        if (e.target.value === 'Increase') {
+            return offertsS = offerts.sort((a, b) => a.startPrice - b.startPrice)
+        } else if (e.target.value === 'Decrease') {
+            return offertsS = offerts.sort((a, b) => b.startPrice - a.startPrice)
+        } else if (e.target.value === 'Increase Time') {
+            return offertsS = offerts.sort((a, b) => Date.parse(a.timer) - Date.parse(b.timer))
+        } else if (e.target.value === 'Decrease Time') {
+            return offertsS = offerts.sort((a, b) => Date.parse(b.timer) - Date.parse(a.timer))
+        }
+    }
     return (
         <section className={styles.mainBox}>
             <div className={styles.cardBox}>
                 <h2 className={styles.title}>Current Deals</h2>
                 <div className={styles.searchBox}>
-                    <input type="text" placeholder='Search...'/>
-                    <button>Search</button>
+                    <div className={styles.searchHolder}>
+                        <input type="text" placeholder='Search...' value={searchValue} onChange={searchHandler} />
+
+                        <button></button>
+
+                        <div className={styles.select}>
+                            <h3>Filter by</h3>
+                            <select name="Option" id="Option" onChange={optionHandler} >
+                                <option value=""></option>
+                                <option value="Increase">Increase Price</option>
+                                <option value="Decrease">Decrease Price</option>
+                                <option value="Increase Time">Increase time</option>
+                                <option value="Decrease Time">Decrease time</option>
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
+
                 <div className={styles.cardHolder}>
-                    <div className={styles.card}>
-                        <img src='https://imgs.search.brave.com/XwvOSFEI6RTHV7mp8g-VHinemqr5Uu3pjHiVXOAiNp0/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5Z/MlUzM0dFN0xkUTRt/VHoyVmhkMlJ3SGFG/aiZwaWQ9QXBp' alt="nqma" />
-                        <div className={styles['card-text']}>
-                            <h2>asdasd</h2>
-                        </div>
-                        <div className={styles['card-stats']}>
-
-                            <div className={styles.stat}>
-                                <div className={styles.value}>123 $</div>
-                            </div>
-                            <div className={styles.detailBox}>
-                                <Link to='/auth/login' className={styles.details}>See More</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <img src='https://imgs.search.brave.com/XwvOSFEI6RTHV7mp8g-VHinemqr5Uu3pjHiVXOAiNp0/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5Z/MlUzM0dFN0xkUTRt/VHoyVmhkMlJ3SGFG/aiZwaWQ9QXBp' alt="nqma" />
-                        <div className={styles['card-text']}>
-                            <h2>asdasd</h2>
-                        </div>
-                        <div className={styles['card-stats']}>
-
-                            <div className={styles.stat}>
-                                <div className={styles.value}>123 $</div>
-                            </div>
-                            <div className={styles.detailBox}>
-                                <Link to='/auth/login' className={styles.details}>See More</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <img src='https://imgs.search.brave.com/XwvOSFEI6RTHV7mp8g-VHinemqr5Uu3pjHiVXOAiNp0/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5Z/MlUzM0dFN0xkUTRt/VHoyVmhkMlJ3SGFG/aiZwaWQ9QXBp' alt="nqma" />
-                        <div className={styles['card-text']}>
-                            <h2>asdasd</h2>
-                        </div>
-                        <div className={styles['card-stats']}>
-
-                            <div className={styles.stat}>
-                                <div className={styles.value}>123 $</div>
-                            </div>
-                            <div className={styles.detailBox}>
-                                <Link to='/auth/login' className={styles.details}>See More</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <img src='https://imgs.search.brave.com/XwvOSFEI6RTHV7mp8g-VHinemqr5Uu3pjHiVXOAiNp0/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5Z/MlUzM0dFN0xkUTRt/VHoyVmhkMlJ3SGFG/aiZwaWQ9QXBp' alt="nqma" />
-                        <div className={styles['card-text']}>
-                            <h2>asdasd</h2>
-                        </div>
-                        <div className={styles['card-stats']}>
-
-                            <div className={styles.stat}>
-                                <div className={styles.value}>123 $</div>
-                            </div>
-                            <div className={styles.detailBox}>
-                                <Link to='/auth/login' className={styles.details}>See More</Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.card}>
-                        <img src='https://imgs.search.brave.com/XwvOSFEI6RTHV7mp8g-VHinemqr5Uu3pjHiVXOAiNp0/rs:fit:632:225:1/g:ce/aHR0cHM6Ly90c2Uy/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5Z/MlUzM0dFN0xkUTRt/VHoyVmhkMlJ3SGFG/aiZwaWQ9QXBp' alt="nqma" />
-                        <div className={styles['card-text']}>
-                            <h2>asdasd</h2>
-                        </div>
-                        <div className={styles['card-stats']}>
-
-                            <div className={styles.stat}>
-                                <div className={styles.value}>123 $</div>
-                            </div>
-                            <div className={styles.detailBox}>
-                                <Link to='/auth/login' className={styles.details}>See More</Link>
-                            </div>
-                        </div>
-                    </div>
-                
+                    {offerts.length > 0
+                        ? offertsS.map(x => <AuctionItem key={x._id} auctionItem={x} />)
+                        : <h2>No Offerts for Now </h2>
+                    }
                 </div>
             </div>
 

@@ -38,19 +38,13 @@ const auctionSchema = mongoose.Schema({
         type: String,
         required: false,
     },
+    timer: {
+        required: true,
+        type: Date,
+        expires: 86400
+    }
 })
-function startCountdown(seconds) {
-    let counter = seconds;
-      
-    const interval = setInterval(() => {
-      console.log(counter);
-      counter--;
-        
-      if (counter < 0 ) {
-        
-      }
-    }, 1000);
-  }
+
 
 const Auction = mongoose.model('Auction',auctionSchema)
 

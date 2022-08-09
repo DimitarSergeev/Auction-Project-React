@@ -52,6 +52,10 @@
     text-decoration: solid;
     font-size:25px ;
   }
+  .time{
+    color: red;
+    font-size:20px ;
+  }
   .type{
     display: flex;
   }

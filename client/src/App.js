@@ -23,7 +23,6 @@ function App() {
 
   const userLogout = () => {
     setUserInfo({});
-    console.log(userInfo);
   };
 
   return (

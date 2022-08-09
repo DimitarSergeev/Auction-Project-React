@@ -10,8 +10,8 @@
 }
 
 .form-box {
-    min-width: 340px;
-    min-height: 450px;
+    min-width: 520px;
+    min-height: 480px;
     width: fit-content;
     position: relative;
     margin: auto;
@@ -96,12 +96,12 @@
 
 .checkbox {
     position: absolute;
-    left: 50%;
+    left: 30%;
     transform: translate(-50%, -50%);
     color: #fff;
     padding-top: 15%;
     width: fit-content;
-
+  font-size: 20px;
 }
 
 .checkbox input[type='checkbox'] {

@@ -28,3 +28,12 @@ export const getLastOfferts = async ()=>{
         throw new Error({error: error.message})
      }
 }
+export const getAll = async ()=>{
+    try {
+       const response = await fetch(`${baseUrl}/auction`)
+       const result = await response.json()
+       return result
+    } catch (error) {
+       throw new Error({error: error.message})
+    }
+}
