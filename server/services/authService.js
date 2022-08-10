@@ -46,7 +46,6 @@ exports.register = async ({ email, userName, password, repeatPassword }) => {
 }
 exports.logout = (token)=>{
     blackList.push(token)
-    console.log(blackList);
 }
 
 exports.createToken = (user) => {

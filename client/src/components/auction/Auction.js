@@ -5,10 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import * as auctionService from '../../services/auctionService'
 
 import { AuctionItem } from './AuctionItem';
+import { Pagination } from './Pagination';
+
 export const Auction = () => {
     const [offerts, setOfferts] = useState([])
     const [searchValue, setSearchValue] = useState('')
-    const [option, setOption] = useState('')
+    const [, setOption] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postPerPage] = useState(8)
     const navigate = useNavigate()
     useEffect(() => {
 
@@ -23,7 +27,6 @@ export const Auction = () => {
     }, [])
 
     let offertsS = offerts.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
-
 
 
 
@@ -42,6 +45,13 @@ export const Auction = () => {
             return offertsS = offerts.sort((a, b) => Date.parse(b.timer) - Date.parse(a.timer))
         }
     }
+
+    const indexOfLastPost = currentPage * postPerPage
+    const indexOfFirstPost = indexOfLastPost - postPerPage
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+    offertsS = offertsS.slice(indexOfFirstPost, indexOfLastPost)
+
     return (
         <section className={styles.mainBox}>
             <div className={styles.cardBox}>
@@ -50,7 +60,6 @@ export const Auction = () => {
                     <div className={styles.searchHolder}>
                         <input type="text" placeholder='Search...' value={searchValue} onChange={searchHandler} />
 
-                        <button></button>
 
                         <div className={styles.select}>
                             <h3>Filter by</h3>
@@ -72,8 +81,10 @@ export const Auction = () => {
                         : <h2>No Offerts for Now </h2>
                     }
                 </div>
-            </div>
 
+                <Pagination postPerPage={postPerPage} totalPosts={offerts.length} paginate={paginate} />
+
+            </div>
         </section>
     )
 

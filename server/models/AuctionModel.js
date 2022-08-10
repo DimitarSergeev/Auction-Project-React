@@ -41,7 +41,6 @@ const auctionSchema = mongoose.Schema({
     timer: {
         required: true,
         type: Date,
-        expires: 86400
     }
 })
 
