@@ -16,6 +16,7 @@ import { Logout } from './components/Logout'
 import { Home } from './components/home/Home'
 import { Auction } from './components/auction/Auction'
 import { DetailsPage } from './components/details/DetailsPage'
+import { EditItem } from './components/edit/EditItem'
 
 import * as auctionService from './services/auctionService'
 
@@ -56,6 +57,7 @@ function App() {
               <Route path='/auction' element={<Auction />} />
               <Route path='/' element={<Home />} />
               <Route path='/offer/create' element={<Create userId={userInfo.userId}/>} />
+              <Route path='/edit/offer/:offerId' element={<EditItem userId={userInfo.userId}/>} />
               <Route path='/auth/register' element={<Register />} />
               <Route path='/auth/login' element={<Login />} />
               <Route path='/auth/logout' element={<Logout />} />

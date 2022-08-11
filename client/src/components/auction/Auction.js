@@ -1,5 +1,5 @@
 import styles from './Auction.module.css'
-import { useState ,useContext } from "react";
+import { useState ,useContext, useEffect } from "react";
 
 import { OfferContext } from '../../contexts/OffertContext';
 
@@ -17,7 +17,9 @@ export const Auction = () => {
 
     let offertsS = offerts.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
 
-
+    useEffect(()=>{
+          console.log('aide');
+    },[offerts])
 
     const searchHandler = (e) => {
         setSearchValue(e.target.value)

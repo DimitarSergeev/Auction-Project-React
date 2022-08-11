@@ -12,7 +12,7 @@ export const Register = () => {
         userName: '',
         password: '',
         repeatPassword: '',
-        needAge: false
+        needAge: ''
     })
 
     const navigate = useNavigate()
@@ -33,10 +33,12 @@ export const Register = () => {
         e.preventDefault()
         const allGood = Object.values(errors).some(x => x !== true)
         if (allGood) {
+            console.log(user);
             authService.register(user)
                 .then(navigate('/auth/login'))
         } 
     }
+    console.log(user);
     const validate = (e) => {
         switch (e.target.name) {
             case 'email':

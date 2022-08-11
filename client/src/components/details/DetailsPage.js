@@ -1,28 +1,70 @@
 import styles from './DetailsPage.module.css'
 
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
 
 import * as auctionService from '../../services/auctionService'
 import { Timer } from '../../util/timer';
+import { AuthContext } from '../../contexts/AuthContext';
 
-
-export const DetailsPage = ({userId}) => {
+export const DetailsPage = ({ userId }) => {
     const { offerId } = useParams()
     const [currOffer, setCurrOffer] = useState({})
-
-    // const timeData = Timer(currOffer)
+    const [bet, setBet] = useState(currOffer.startPrice)
+    const { userInfo } = useContext(AuthContext)
+    const navigate = useNavigate()
+    
     useEffect(() => {
         auctionService.getOne(offerId)
+        .then(result => {
+            setCurrOffer(result)
+            console.log(currOffer);
+        })
+    }, [offerId])
+
+    const timeData = []
+    console.log(currOffer.timer);
+   
+    const sendbet = () => {
+        auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
             .then(result => {
                 setCurrOffer(result)
             })
-    }, [offerId])
+    }
+
+    const addBet = (e) => {
+        setBet(e.target.value)
+    }
+
+    const buyNowhandler = () => {
+        auctionService.buyNow(offerId, userInfo.userId)
+            .then(() => {
+                auctionService.del(offerId)
+                    .catch(() => navigate('/404'))
+            })
+            .then(() => navigate('/about'))
+            .catch(() => navigate('/404'))
+    }
+
+    const deleteItem = () => {
+        try {
+            auctionService.del(offerId)
+            navigate('/')
+        } catch (error) {
+            navigate('/404')
+        }
+    }
     let certificate = ''
+    let winning = ''
     if (currOffer.nameCert) {
         certificate = currOffer.nameCert
-    }else{
+    } else {
         certificate = currOffer.certificate
+    }
+    if (currOffer.winBet === userInfo.userId) {
+        winning = true
+    } else {
+        winning = false
     }
 
     const isOwner = currOffer.owner === userId
@@ -37,20 +79,23 @@ export const DetailsPage = ({userId}) => {
                     />
                 </div>
                 <div className={styles.time}>
-                    {/* <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
-                    <span>{timeData.seconds}</span> */}
+                    <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
+                    <span>{timeData.seconds}</span>
                 </div>
                 <div className={styles.certificate}>
                     <span>Certificate: {certificate} </span>
                 </div>
+                {winning &&
+                    <label className={styles.winning}>You Leading </label>
+                }
                 <div className={styles.btnBox}>
                     <div className={styles.bet}>
-                        <input type="number" placeholder="Enter amount..." />
-                        <button>Bet</button>
+                        <input type="number" placeholder={`Min ${currOffer.startPrice + 10} $`} onChange={addBet} />
+                        <button onClick={() => sendbet()}>Bet</button>
                     </div>
                 </div>
 
-                <button className={styles.buyNow}>Buy Now {currOffer.buyNow}$</button>
+                <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
 
                 <div className={styles.right}>
                     <h1>{currOffer.title}</h1>
@@ -67,10 +112,10 @@ export const DetailsPage = ({userId}) => {
                         {currOffer.description}
                     </p>
                     {isOwner &&
-                    <div className={styles.ownerBtn}>
-                        <button className={styles.edit}>Edit</button>
-                        <button className={styles.delete}>Delete</button>
-                    </div>
+                        <div className={styles.ownerBtn}>
+                            <Link to={`/edit/offer/${currOffer._id}`} className={styles.edit}>Edit</Link>
+                            <button className={styles.delete} onClick={() => deleteItem()}>Delete</button>
+                        </div>
                     }
                 </div>
             </div>

@@ -3,6 +3,7 @@ const router = require('express').Router()
 const tokenHelper = require('../utils/tokenHelper')
 const auctionService = require('../services/auctionService')
 const authService = require('../services/authService')
+const { default: mongoose } = require('mongoose')
 
 router.get('/', async (req, res) => {
     const offerts = await auctionService.getAll().lean()
@@ -44,7 +45,36 @@ router.get('/offer/:offerId/details', async (req,res)=>{
     }
 })
 
-// router.patch('/:offerId', async (req,res)=>{
-//     const user = await authService.getOne(req.params.offerId)
-// })
+router.patch('/:offerId', async (req,res)=>{
+    try {
+        const offer = await auctionService.getOne(req.params.offerId)
+        offer.startPrice = req.body.startPrice
+        offer.winBet = req.body.winBet
+        await offer.save()
+        return res.json(offer)
+        
+    } catch (error) {
+        return res.json({ error: error.message })
+    }
+})
+
+router.get('/:offerId/:userId',async(req,res)=>{
+    try {
+        const offer = await auctionService.getOne(req.params.offerId)
+        const user = await authService.getOne(req.params.userId)
+        offer.owner = req.params.userId
+        offer.save()
+        user.Mycollection.push(offer)
+        user.save()
+        return res.json(user)
+        
+    } catch (error) {
+        return res.json({ error: error.message })
+    }
+})
+
+router.get('/:offerId', async(req,res)=>{
+    await auctionService.delete(req.params.offerId)
+    return res.status(204)
+})
 module.exports = router
