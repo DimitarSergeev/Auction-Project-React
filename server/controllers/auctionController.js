@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 const tokenHelper = require('../utils/tokenHelper')
 const auctionService = require('../services/auctionService')
+const authService = require('../services/authService')
 
 router.get('/', async (req, res) => {
     const offerts = await auctionService.getAll().lean()
@@ -33,5 +34,17 @@ router.post('/offer/create', async (req, res) => {
     }
 })
 
+router.get('/offer/:offerId/details', async (req,res)=>{
+    try {
+        const offert = await auctionService.getOne(req.params.offerId).lean()
+        return res.json(offert)
+    } catch (error) {
+        res.status(400)
+        return res.json({ error: error.message })
+    }
+})
 
+// router.patch('/:offerId', async (req,res)=>{
+//     const user = await authService.getOne(req.params.offerId)
+// })
 module.exports = router

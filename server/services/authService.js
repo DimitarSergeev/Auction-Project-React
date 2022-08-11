@@ -7,6 +7,7 @@ const User = require('../models/UserModel')
 
 exports.getOne = (userId) => User.findById(userId)
 
+
 exports.login = async ({ email, password }) => {
     const user = await User.findOne({ email })
     if (!user) {

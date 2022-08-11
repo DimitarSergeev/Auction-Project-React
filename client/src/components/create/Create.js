@@ -6,7 +6,7 @@ import {AuthContext } from '../../contexts/AuthContext'
 import styles from './Create.module.css'
 import * as auctionService from '../../services/auctionService'
 
-export const Create = () => {
+export const Create = ({userId}) => {
     const [errors, setErrors] = useState({});
     const [data, setData] = useState({
         title: '',
@@ -35,11 +35,10 @@ export const Create = () => {
         
     }
 
-
     const submitHandler = (e) => {
         e.preventDefault()
 
-        auctionService.create(data,userInfo.token)
+        auctionService.create({...data,owner:userId},userInfo.token)
             .then(() => navigate('/auction'))
             .catch(error => console.log(error))
     }

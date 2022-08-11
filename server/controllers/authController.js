@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
     const user = await authService.login(req.body)
     const token = await authService.createToken(user)
     
-    return res.json({ userName: user.userName, token })
+    return res.json({ userName: user.userName, token ,userId: user._id})
   } catch (error) {
     res.status(404)
     return res.json({ error: error.message })
@@ -32,5 +32,6 @@ router.get('/logout', (req, res) => {
   // tokenHelper.clearOldTokens()
   return res.status(204)
 })
+
 
 module.exports = router

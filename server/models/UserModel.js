@@ -21,6 +21,11 @@ const userSchema = mongoose.Schema({
         minlength: 6
 
     },
+    Mycollection:[
+        {
+            type: Object
+        }
+    ]
 
 })
 

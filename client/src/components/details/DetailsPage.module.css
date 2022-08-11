@@ -1,0 +1,219 @@
+.box {
+    padding-top: 100px;
+    padding-left: 20%;
+}
+
+.card {
+    position: relative;
+    height: 470px;
+    width: 900px;
+    background-color: #FFF;
+    -webkit-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 93px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 25px;
+}
+
+.thumbnail {
+    float: left;
+    position: relative;
+    left: 30px;
+    top: -30px;
+    height: 320px;
+    width: 530px;
+    -webkit-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+}
+
+img.left {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: auto;
+    width: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.time {
+    float: left;
+    position: relative;
+    color: white;
+    height: 50px;
+    width: 150px;
+    right: 480px;
+    top: 320px;
+    background-color: #fc2020;
+    border-radius: 10px;
+   padding-left: 20px;
+   padding-top: 10px;
+   font-size: 30px;
+}
+
+.certificate{
+    float: left;
+    position: relative;
+    color: rgb(0, 0, 0);
+    height: 50px;
+    width:fit-content;
+    right: 450px;
+    top: 320px;
+    background-color: #eeff00;
+    border-radius: 10px;
+   padding-left: 15px;
+   padding-top: 10px;
+   font-size: 20px ;
+   font-family:'Niconne';
+}
+   
+.btnBox{
+    float: left;
+    position: relative;
+    right: 480px;
+    top: 340px;
+}
+.btnBox input[type='number']{
+    border-radius: 10px;
+    background-color: rgb(219, 200, 200);
+    height: 50px;
+    padding-left: 8px;
+    width: 100px;
+    border: none;
+    font-size: 15px;
+}
+.btnBox input[type='number']:focus{
+    box-shadow: 0 0 0px #81f3c4;
+    background-color: rgb(255, 232, 232);
+}
+.btnBox button{
+    border-radius: 10px;
+    border: none;
+    height: 50px;
+    width: 50px;
+    background-color: rgb(65, 218, 65);
+}
+.btnBox button:hover{
+    transition: 0.5 ease; 
+    background-color: rgb(0, 252, 0);
+    border: 1px solid  rgb(65, 218, 65);
+    box-shadow: 0 0 10px rgb(0, 252, 0);
+    color: white;
+}
+.buyNow{
+    position: relative;
+    float: left;
+    right: 450px;
+    top: 340px;
+    width: fit-content;
+    padding-left: 10px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 25px;
+    background-color: #00ff0d;
+    border:none;
+}
+.buyNow:hover{
+    transition: 0.5 ease; 
+    background-color: rgb(0, 252, 0);
+    border: 1px solid #00ff0d;
+    box-shadow: 0 0 10px rgb(0, 252, 0);
+    color: white;
+}
+
+.right {
+    margin-left: 590px;
+    margin-right: 20px;
+}
+
+.right h1 {
+    display: inline-flex;
+    padding-top: 15px;
+    font-size: 1.3rem;
+    color: #4B4B4B;
+}
+
+.author {
+    height: 30px;
+    width: 100%;
+    position: relative;
+    margin-left: 50px;
+
+}
+.author  h2 {
+    position: relative;
+    display: flex;
+    text-align: center;
+    font-size: 15px;
+    color: black;
+    right:50px;
+    padding-top: 5px;
+}
+
+.year  h2 {
+    position: relative;
+    display: flex;
+    text-align: center;
+    font-size: 15px;
+    color: black;
+    right:50px;
+    padding-top: 5px;
+}
+
+.separator {
+    margin-top: 10px;
+    border: 1px solid #8f8f8f;
+}
+.year {
+    /* margin-top: 10px; */
+    padding-top: 10px;
+    margin-left: 50px;
+    width: 100%;
+    border-radius: 20px;
+    position: relative;
+}
+
+p {
+    text-align: justify;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 150%;
+    color: #4B4B4B;
+}
+
+.ownerBtn{
+    padding: 10px;
+}
+
+.ownerBtn button {
+    margin-right: 35px;
+    height: 30px;
+    width: 100px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+}
+
+.edit{
+    background-color: #5a6dda;
+}
+.edit:hover{
+    transition: 0.5 ease; 
+    background-color: #0323d8;
+    border: 1px solid #5a6dda;
+    box-shadow: 0 0 10px #0323d8;
+    color: wheat;
+}
+
+.delete{
+    background-color: rgb(243, 33, 33);
+}
+.delete:hover{
+    transition: 0.5 ease; 
+    background-color: red;
+    border: 1px solid  rgb(243, 33, 33);
+    box-shadow: 0 0 10px red;
+    color: wheat;
+}

@@ -1,30 +1,19 @@
 import styles from './Auction.module.css'
-import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState ,useContext } from "react";
 
-import * as auctionService from '../../services/auctionService'
+import { OfferContext } from '../../contexts/OffertContext';
+
 
 import { AuctionItem } from './AuctionItem';
 import { Pagination } from './Pagination';
 
 export const Auction = () => {
-    const [offerts, setOfferts] = useState([])
+    const {offerts} = useContext(OfferContext)
     const [searchValue, setSearchValue] = useState('')
     const [, setOption] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     const [postPerPage] = useState(8)
-    const navigate = useNavigate()
-    useEffect(() => {
-
-        auctionService.getAll()
-            .then(result => {
-                setOfferts(result)
-            })
-            .catch(() => {
-                navigate('/404')
-            })
-
-    }, [])
+  
 
     let offertsS = offerts.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
 

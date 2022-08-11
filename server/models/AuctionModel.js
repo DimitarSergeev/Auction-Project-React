@@ -8,7 +8,7 @@ const auctionSchema = mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        required : [true, 'Image url is required'],
+        required: [true, 'Image url is required'],
         validate: [/^https?/, 'Image need start with http/s']
     },
     createOn: {
@@ -25,7 +25,7 @@ const auctionSchema = mongoose.Schema({
         type: Number,
         min: [500, 'Min buyNow price is 500$']
     },
-    description:{
+    description: {
         type: String,
         required: [true, 'Product must have a description!'],
         minlength: [10, 'Product description need be min 10 charter length']
@@ -41,10 +41,17 @@ const auctionSchema = mongoose.Schema({
     timer: {
         required: true,
         type: Date,
+    }, owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
+    },
+    winBet: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     }
 })
 
 
-const Auction = mongoose.model('Auction',auctionSchema)
+const Auction = mongoose.model('Auction', auctionSchema)
 
 module.exports = Auction
