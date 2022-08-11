@@ -26,6 +26,14 @@ router.post('/login', async (req, res) => {
     return res.json({ error: error.message })
   }
 })
+router.post('/profile',async(req,res)=>{
+  try {
+    const user = await authService.getOne(req.body)
+    return res.json(user)
+  } catch (error) {
+    return res.json({ error: error.message })
+  }
+})
 
 router.get('/logout', (req, res) => {
   authService.logout(req.headers['x-authorization'])

@@ -17,6 +17,8 @@ import { Home } from './components/home/Home'
 import { Auction } from './components/auction/Auction'
 import { DetailsPage } from './components/details/DetailsPage'
 import { EditItem } from './components/edit/EditItem'
+import { NotFound } from './components/404'
+import { Profile } from './components/profile/Profile'
 
 import * as auctionService from './services/auctionService'
 
@@ -53,6 +55,8 @@ function App() {
         <OfferContext.Provider value={{offerts}} >
           <main className='main'>
             <Routes>
+              <Route path='/profile' element={<Profile userInfo={userInfo}/>}/>
+              <Route path='/404' element={<NotFound />} />
               <Route path='/offer/:offerId/details' element={<DetailsPage userId={userInfo.userId}/>} />
               <Route path='/auction' element={<Auction />} />
               <Route path='/' element={<Home />} />

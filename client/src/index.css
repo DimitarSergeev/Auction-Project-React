@@ -27,3 +27,22 @@ code {
   background-position: center;
   background-size: cover;
 }
+.not-found-page{
+  padding-top: 20px;
+  width: 80%;
+  height: 80%;
+  padding-left: 250px;
+  padding-right: 50px;
+  
+}
+.title404{
+   position: absolute;
+   color: antiquewhite;
+   width: fit-content;
+   font-size: 100px;
+   left: 400px;
+}
+.main404{
+  height: 100%;
+}
+

@@ -57,6 +57,24 @@ router.patch('/:offerId', async (req,res)=>{
         return res.json({ error: error.message })
     }
 })
+router.post('/edit/offer/:offerId',async (req,res)=>{
+    let data = req.body
+    if (data.certificate === "No" && req.body.nameCert ) {
+        const { nameCert, ...corectData } = req.body
+        data = corectData
+    }
+    const validToken = tokenHelper.validateToken(req.headers['x-authorization'])
+    if (!validToken) {
+        return res.json({ error: 'The Authorization token has expired, please login !' })
+    }
+    try {
+        const editedOffer = await auctionService.edit(req.params.offerId,data)
+        return res.json(editedOffer)
+    } catch (error) {
+        res.status(400)
+        return res.json({ error: error.message })
+    }
+})
 
 router.get('/:offerId/:userId',async(req,res)=>{
     try {

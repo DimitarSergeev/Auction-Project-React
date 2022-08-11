@@ -15,7 +15,7 @@ export const create = async (offerData, token) => {
 
         return result;
     } else {
-        throw { message: 'Unable to create offer' }
+        throw new Error({ message: 'Unable to create offer' })
     }
 }
 
@@ -47,6 +47,22 @@ export const getOne = async (offerId) => {
         throw new Error({ error: error.message })
     }
 }
+export const edit = async (offerId,token,offerData) =>{
+    const response = await fetch(`${baseUrl}/edit/offer/${offerId}`, {
+     method: 'POST',
+     headers: {
+         'content-type': 'application/json',
+         'X-Authorization': token
+     },
+     body: JSON.stringify(offerData)})
+     if (response.ok) {
+         const result = await response.json();
+ 
+         return result;
+     } else {
+         throw new Error({ message: 'Unable to Bet' })
+     }
+ }
 
 export const bet = async (offerId,betData) =>{
    const response = await fetch(`${baseUrl}/${offerId}`, {
@@ -61,7 +77,7 @@ export const bet = async (offerId,betData) =>{
 
         return result;
     } else {
-        throw { message: 'Unable to Bet' }
+        throw new Error({ message: 'Unable to Bet' })
     }
 }
 
@@ -73,7 +89,7 @@ export const buyNow = async (offerId,userId) =>{
 
         return result;
     } else {
-        throw { message: 'Someting wen wrong' }
+        throw new Error({ message: 'Someting went wrong' })
     }
 }
 export const del = async (offerId)=>{
@@ -83,6 +99,6 @@ export const del = async (offerId)=>{
 
         return result;
     } else {
-        throw { message: 'Someting wen wrong' }
+        throw new Error({ message: 'Someting went wrong' })
     }
 }

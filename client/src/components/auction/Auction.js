@@ -17,10 +17,6 @@ export const Auction = () => {
 
     let offertsS = offerts.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
 
-    useEffect(()=>{
-          console.log('aide');
-    },[offerts])
-
     const searchHandler = (e) => {
         setSearchValue(e.target.value)
     }

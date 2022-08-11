@@ -17,6 +17,15 @@ export const Timer = (item) => {
             let hours = Math.floor(minutes / 60)
             minutes = Math.floor(minutes % 60)
             seconds = Math.floor(seconds % 60)
+            
+            if (isNaN(hours)) {
+                 setTimeData({
+                    seconds: '00',
+                    minutes: '00',
+                    hours: '00'
+                })
+                return () => clearInterval(intervalId)
+            }
             const time = { seconds, minutes, hours }
             setCurrentEndTime(oldcurrTime => oldcurrTime - 1000)
             setTimeData(time)

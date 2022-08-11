@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Timer } from '../../util/timer';
 
 export const AuctionItem = ({ auctionItem }) => {
-    console.log(auctionItem);
     const timeData = Timer(auctionItem)
     return (
         <div className={styles.card}>

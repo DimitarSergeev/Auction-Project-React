@@ -95,7 +95,7 @@ export const Create = ({userId}) => {
                     {errors.title &&
                         <label htmlFor="title" className={styles.error}>Product need be min 4 charter length !</label>
                     }
-                    <input type='text' className={styles['input-field']} placeholder='Title' name='title' onChange={changeHandler}  />
+                    <input type='text' className={styles['input-field']} placeholder='Title' name='title' onChange={changeHandler} onBlur={(e) => validate(e)} />
                     {errors.imageUrl &&
                         <label htmlFor="imageUrl" className={styles.error}>Image need start with http/s</label>
                     }

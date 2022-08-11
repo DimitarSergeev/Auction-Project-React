@@ -36,6 +36,22 @@ export const login = async (userData) => {
         throw { message: 'Email or password dont match' };
     }
 }
+export const getOneUser = async(userId,token) =>{
+      const response = await fetch(`${baseUrl}/profile`,{
+        method: 'POST',
+        headers: {
+            'X-Authorization': token
+        },
+        body: JSON.stringify(userId)
+      })
+      if (response.ok) {
+        const result = await response.json();
+
+        return result;
+    } else {
+        throw { message: 'User not found' };
+    }
+}
 
 export const logout = async (token) => {
     try {

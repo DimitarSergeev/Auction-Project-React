@@ -32,10 +32,10 @@ export const Header = () => {
                     </NavLink>
                 </li>
                 <li className={styles.list}>
-                    <NavLink to='/about'
+                    <NavLink to='/profile'
                         className={({ isActive }) => (isActive ? styles.active : styles.text)}
                     >
-                        About
+                       Profile
                     </NavLink>
                 </li>
                 {userInfo.token

@@ -13,18 +13,19 @@ export const DetailsPage = ({ userId }) => {
     const [bet, setBet] = useState(currOffer.startPrice)
     const { userInfo } = useContext(AuthContext)
     const navigate = useNavigate()
-    
-    useEffect(() => {
-        auctionService.getOne(offerId)
-        .then(result => {
-            setCurrOffer(result)
-            console.log(currOffer);
-        })
-    }, [offerId])
 
-    const timeData = []
-    console.log(currOffer.timer);
-   
+    useEffect(() => {
+      const set = async()=>{
+        await auctionService.getOne(offerId)
+        .then(result => {
+            setCurrOffer({ ...result })
+        })
+      } 
+      set()
+    }, [offerId])
+    
+    
+    const timeData = Timer(currOffer)
     const sendbet = () => {
         auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
             .then(result => {
@@ -76,6 +77,7 @@ export const DetailsPage = ({ userId }) => {
                     <img
                         className={styles.left}
                         src={currOffer.imageUrl}
+                        alt='ne'
                     />
                 </div>
                 <div className={styles.time}>
