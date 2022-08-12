@@ -74,7 +74,7 @@ function App() {
             </Routes>
           </main>
         </OfferContext.Provider>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </AuthContext.Provider>
   );

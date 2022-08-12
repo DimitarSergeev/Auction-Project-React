@@ -17,6 +17,9 @@ export const Header = () => {
             </NavLink>
 
             <ul>
+                {userInfo.userName &&
+                    <p className={styles.userName}>Wellcome, {userInfo.userName}</p>
+                }
                 <li className={styles.list}>
                     <NavLink to='/'
                         className={({ isActive }) => (isActive ? styles.active : styles.text)}

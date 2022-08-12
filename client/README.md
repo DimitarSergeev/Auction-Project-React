@@ -1,4 +1,222 @@
-# Getting Started with Create React App
+# React-App
+
+## 🛠 Libraries and tools used
+
+ - [react] : useContext,useState , useEffect, useMemo , useLocalStorage - to set localStorage user info 
+ - [react-router-dom] : BrowserRouter ,useParams, useNavigate, Link, NavLink, Navigate, Outlet
+
+ ## Getting Started 
+    
+    Clone this repository and install dependencies
+
+***
+
+ -> git clone  https://github.com/DimitarSergeev/Auction-Project-React.git
+ -> cd client
+ -> npm i 
+
+   --- to start app npm start --- 
+***
+## Base URL
+
+ App run on: http://localhost:3000 
+
+ # Endpoints: 
+
+   *** Public ***
+  -> Home - '/'
+  -> Auction/Catalog - '/auction'
+  -> Login - '/auth/login'
+  -> Register - '/auth/register'
+  *** Privete ***
+  -> Profile - '/auth/profile/:userId'
+  -> Offer/Create - '/offer/create'
+  -> Details/Offer - '/offer/:offerId/details'
+  -> Edit-Offer - '/edit/offer/:offerId'
+ 
+ # Api send a request (Service)
+
+  *** Auth-User *** 
+  -> Register - '/auth/register' - POST - body {email, userName,password,repeatPassword} 
+  -> Login - '/auth/login' - POST - body {email, password} - Set userInformation on Browser
+  -> Profile - '/auth/profile/:userId' - GET - Тake the winning bids and visualize them
+  -> Logout - '/auth/logout - GET - Logout user at server and client, clearing userInformation on Browser 
+  *** Auction ***
+  -> Home - '/' - GET - Get last tree offers and visualize them
+  -> Auction/Catalog - '/auction' - GET - Get all offers and visualize them
+  ->Offer/Create - POST - body {title , imageUrl, createOn(year) , startPrice , buyNow(price) , description, certificate(Yes/No), nameCert(optional) }
+  ->Details/Offer - '/offer/:offerId/details'  - GET - Get current offert and show all details 
+ 
+  ->Edit/Offer - '/edit/offer/:offerId' - POST - body {title , imageUrl, createOn(year) , startPrice , buyNow(price) , description, certificate(Yes/No),timer(Date.now()), nameCert(optional) }
+  
+  -> Bet - '/:offerId' - PATCH - body {startPrice(new), winBet(userId)}
+  -> buyNow - '/:offerId/:userId' - GET - Use offerId and userId on server to set offer in user collection and delete offer
+  -> Delete - '/:offerId' - GET - delete offer 
+
+
+*****************************************************************************************************************************************************************************
+
+# Server 
+
+## 🛠 Libraries and tools used
+
+- [Express](https://expressjs.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [Cors](https://github.com/expressjs/cors)
+- [Nodemon](https://github.com/remy/nodemon)
+- [jsonwebtoken]
+- [bcrypt]
+- [body-parser]
+
+
+## Getting Started 
+    
+    Clone this repository and install dependencies
+
+***
+
+ -> git clone https://github.com/DimitarSergeev/Auction-Project-React.git (if you haven't clone it already )
+ -> cd server
+ -> npm i 
+
+   --- to start app npm start --- 
+***
+## Base URL
+The Base URL for the API is: `http://localhost:3030`
+
+Architecture : Controller -> Service -> Model 
+
+### You can edit '.env' file in the main directory and populate the following information:
+
+- `port` -- For Api call;
+- `saltRounds` -- saltRounds for hashed user password
+
+
+### also can edit '.database'
+
+- `connectionString` - to set mongoDB host url 
+
+
+//////////////////////////////////////////////////////////////
+
+if status to succses api is not write , correct status is 200 
+
+//////////////////////////////////////////////////////////////
+
+*** AUTH-USER Controller ***
+### Create user 
+
+ Send `POST` to `/auth/register'`  service return JSON object with stored data in mnogoDb 
+ Content look like : { email: String ,userName:String password: String , repeatPassword: String }
+  
+### Login 
+
+Send `POST` to `/auth/login` service return JSON object { userName: String, token:jsonwebtoken ,userId: ObjectId(String)}
+Content look like : { email: String , password: String}
+
+###  User profil 
+
+Send `GET` to `/auth//profile/:userId` service return JSON object {_id: ObjectId(string), email:String , userName: String , password: string(hashed) , Mycollection: array}
+  
+###  Logout 
+
+Send `GET` to `/auth/logout` service response with status 204 (no content )
+
+*** AUCTION Controller ***
+
+offers content look like : {
+    _id : ObjectId(string)
+    title: String 
+    imageUrl: string starts with https?://
+    createOn: Number
+    startPrice: Number
+    buyNow:Number
+    description: String
+    certificate: String (Yes/No)
+    timer: Date 
+    owner:ObjectId(string)
+
+### Home page last tree offers 
+
+Send `GET` to `/` service return JSON object with last tree avalible offers 
+
+### Auction 
+
+Send `GET` to `/auction` service return JSON object all avalible offers 
+
+### Create Offer 
+
+Send `POST` to `/offer/create` service return JSON object with stored data in mnogoDb
+conetnt offers without timer , timer set on Server Date.Now()
+
+### Details Offer 
+
+Send `GET` to `/offer/:offerId/details` service response JSON object with current offer information
+
+
+### Edit offer 
+
+Send `POST` to `/edit/offer/:offerId` service return service return JSON object with changed offer
+content as mentioned above 
+
+### Bet 
+
+Send `PATCH` to `/:offerId` service return JSON object with changed offer
+content look like {
+    startPrice: Number,
+    winBet:ObjectId(string)
+}
+
+### buy Now 
+
+Send `GET` to `/:offerId/:userId` service response with a JSON object :  changed user (add current offer in MyCollection ) and delete game at server
+
+### Delete Offer 
+
+Send `GET` to `/:offerId` service response with status 204 and delete game at server
+
+**In case of a validation error, the service will respond with an error status code and an object containing the error message**.
+
+### Error Response:
+
+```
+{
+  message: string;
+}
+```
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +285,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->

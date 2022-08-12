@@ -70,3 +70,10 @@
     transition: 0.1s;
     color: #DF0F73;
 }
+
+.userName{
+    color: aliceblue;
+    padding-top: 15px;
+    position: relative;
+    
+}

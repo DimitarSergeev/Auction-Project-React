@@ -63,12 +63,12 @@ export const DetailsPage = ({ userId, offerts }) => {
     } else {
         certificate = currOffer.certificate
     }
+    
     if (currOffer.winBet === userInfo.userId) {
         winning = true
     } else {
         winning = false
     }
-
     let timeEnd = false
     if (timeData.hours.includes('-')) {
         timeEnd = true
@@ -100,15 +100,15 @@ export const DetailsPage = ({ userId, offerts }) => {
                         {winning &&
                             <label className={styles.winning}>You Leading </label>
                         }
-                        {bet < (currOffer.startPrice + 10) &&
-                        <label className={styles.winning}>min bet is {currOffer.startPrice + 10} </label>
-                        }
                         <div className={styles.btnBox}>
                             <div className={styles.bet}>
-                                <input type="number" placeholder={`Min ${currOffer.startPrice + 10} $`} onChange={addBet} />
+                                <input type="number" placeholder={`Min ${currOffer.startPrice +10} $`} onChange={addBet} onBlur={(e)=> e.target.value = ''}/>
                                 <button onClick={() => sendbet()}>Bet</button>
                             </div>
                         </div>
+                        {bet < (currOffer.startPrice + 10) &&
+                        <p className={styles.minBet}>min bet is {currOffer.startPrice +10} </p>
+                        }
 
                         <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
                         </>

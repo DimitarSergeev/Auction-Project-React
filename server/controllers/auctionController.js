@@ -7,7 +7,8 @@ const { default: mongoose } = require('mongoose')
 
 router.get('/', async (req, res) => {
     const offerts = await auctionService.getAll().lean()
-    const lastTree = offerts.slice(0, 3)
+    let firstIndex = offerts.length - 3
+    const lastTree = offerts.slice(firstIndex)
     return res.json(lastTree)
 })
 
