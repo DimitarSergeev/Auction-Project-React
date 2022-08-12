@@ -19,6 +19,7 @@ import { DetailsPage } from './components/details/DetailsPage'
 import { EditItem } from './components/edit/EditItem'
 import { NotFound } from './components/404'
 import { Profile } from './components/profile/Profile'
+import { PrivetRoute } from './components/PrivetRoute'
 
 import * as auctionService from './services/auctionService'
 
@@ -55,16 +56,21 @@ function App() {
         <OfferContext.Provider value={{offerts}} >
           <main className='main'>
             <Routes>
+              <Route element={<PrivetRoute />}>
+                
               <Route path='/auth/profile/:userId' element={<Profile userInfo={userInfo}/>}/>
+              <Route path='/offer/create' element={<Create userId={userInfo.userId}/>} />
+              <Route path='/edit/offer/:offerId' element={<EditItem userId={userInfo.userId}/>} />
+              <Route path='/auth/logout' element={<Logout />} />
+
+              </Route>
+
               <Route path='/404' element={<NotFound />} />
               <Route path='/offer/:offerId/details' element={<DetailsPage userId={userInfo.userId} offerts={offerts}/>} />
               <Route path='/auction' element={<Auction />} />
               <Route path='/' element={<Home />} />
-              <Route path='/offer/create' element={<Create userId={userInfo.userId}/>} />
-              <Route path='/edit/offer/:offerId' element={<EditItem userId={userInfo.userId}/>} />
               <Route path='/auth/register' element={<Register />} />
               <Route path='/auth/login' element={<Login />} />
-              <Route path='/auth/logout' element={<Logout />} />
             </Routes>
           </main>
         </OfferContext.Provider>

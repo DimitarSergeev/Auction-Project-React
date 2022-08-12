@@ -84,7 +84,6 @@ router.get('/:offerId/:userId', async (req, res) => {
         await offer.save()
         user.Mycollection.push(offer)
         await user.save()
-        console.log(user);
         return res.json(user)
 
     } catch (error) {

@@ -52,6 +52,9 @@
     text-decoration: solid;
     font-size:25px ;
   }
+  .card-text p {
+    color: red;
+  }
   .time{
     color: red;
     font-size:20px ;

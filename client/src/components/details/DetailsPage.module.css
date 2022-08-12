@@ -59,7 +59,7 @@ img.left {
     color: rgb(0, 0, 0);
     height: 50px;
     width:fit-content;
-    right: 500px;
+    right: 350px;
     top: 320px;
     background-color: #eeff00;
     border-radius: 10px;
@@ -105,7 +105,7 @@ img.left {
 .buyNow{
     position: absolute;
     float: left;
-    right: 450px;
+    right: 350px;
     top: 400px;
     width: fit-content;
     padding-left: 10px;
@@ -235,4 +235,11 @@ p {
     position: absolute;
     right: 740px;
     top: 380px;
+}
+.notSold{
+    position: absolute;
+    top: 350px;
+    left: 50px;
+    font-size: 50px;
+    color: rgb(255, 0, 0);
 }

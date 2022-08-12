@@ -41,7 +41,6 @@ const auctionSchema = mongoose.Schema({
     timer: {
         required: true,
         type: Date,
-        expired: 86400
     }, owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User'

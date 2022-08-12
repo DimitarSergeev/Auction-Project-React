@@ -7,7 +7,7 @@ import * as auctionService from '../../services/auctionService'
 import { Timer } from '../../util/timer';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export const DetailsPage = ({ userId,offerts }) => {
+export const DetailsPage = ({ userId, offerts }) => {
     const { offerId } = useParams()
     const [currOffer, setCurrOffer] = useState({})
     const [bet, setBet] = useState(currOffer.startPrice)
@@ -15,17 +15,17 @@ export const DetailsPage = ({ userId,offerts }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-      const set = async()=>{
-        await auctionService.getOne(offerId)
-        .then(result => {
-            setCurrOffer({ ...result })
-        })
-      } 
-      set()
+        const set = async () => {
+            await auctionService.getOne(offerId)
+                .then(result => {
+                    setCurrOffer({ ...result })
+                })
+        }
+        set()
     }, [offerId])
 
-    const currOffert1 = useMemo(()=> offerts.find(x => x._id === offerId),[offerId,offerts]) 
-    
+    const currOffert1 = useMemo(() => offerts.find(x => x._id === offerId), [offerId, offerts])
+
     const timeData = Timer(currOffert1)
     const sendbet = () => {
         auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
@@ -69,7 +69,12 @@ export const DetailsPage = ({ userId,offerts }) => {
         winning = false
     }
 
-    const isOwner = currOffer.owner === userId
+    let timeEnd = false
+    if (timeData.hours.includes('-')) {
+        timeEnd = true
+    }
+    let isOwner = currOffer.owner === userId && !timeEnd
+
     return (
         <div className={styles.box}>
 
@@ -81,24 +86,33 @@ export const DetailsPage = ({ userId,offerts }) => {
                         alt='ne'
                     />
                 </div>
-                <div className={styles.time}>
-                    <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
-                    <span>{timeData.seconds}</span>
-                </div>
-                <div className={styles.certificate}>
-                    <span>Certificate: {certificate} </span>
-                </div>
-                {winning &&
-                    <label className={styles.winning}>You Leading </label>
-                }
-                <div className={styles.btnBox}>
-                    <div className={styles.bet}>
-                        <input type="number" placeholder={`Min ${currOffer.startPrice + 10} $`} onChange={addBet} />
-                        <button onClick={() => sendbet()}>Bet</button>
+                {timeEnd
+                    ? <p className={styles.notSold}>This item is no avalible ! </p>
+                    : <> <div className={styles.time}>
+                        <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
+                        <span>{timeData.seconds}</span>
                     </div>
-                </div>
+                        <div className={styles.certificate}>
+                            <span>Certificate: {certificate} </span>
+                        </div>
+                        {userInfo.token && 
+                        <> 
+                        {winning &&
+                            <label className={styles.winning}>You Leading </label>
+                        }
+                        <div className={styles.btnBox}>
+                            <div className={styles.bet}>
+                                <input type="number" placeholder={`Min ${currOffer.startPrice + 10} $`} onChange={addBet} />
+                                <button onClick={() => sendbet()}>Bet</button>
+                            </div>
+                        </div>
 
-                <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
+                        <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
+                        </>
+                        }
+                    </>
+                }
+
 
                 <div className={styles.right}>
                     <h1>{currOffer.title}</h1>
@@ -114,11 +128,11 @@ export const DetailsPage = ({ userId,offerts }) => {
                     <p>
                         {currOffer.description}
                     </p>
-                    {isOwner &&
-                        <div className={styles.ownerBtn}>
-                            <Link to={`/edit/offer/${currOffer._id}`} className={styles.edit}>Edit</Link>
-                            <button className={styles.delete} onClick={() => deleteItem()}>Delete</button>
-                        </div>
+                    {isOwner && 
+                            <div className={styles.ownerBtn}>
+                                <Link to={`/edit/offer/${currOffer._id}`} className={styles.edit}>Edit</Link>
+                                <button className={styles.delete} onClick={() => deleteItem()}>Delete</button>
+                            </div>
                     }
                 </div>
             </div>
