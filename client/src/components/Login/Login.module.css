@@ -121,6 +121,21 @@
     color: white;
     display: inline-block;
 }
+.errorBox{
+    position: absolute;
+    left: 41%;
+    top: 20px;
+    width: fit-content;
+    height: 50px;
+    padding-top: 10px;
+    background-color: #fc0202;
+    border-radius: 10px;
+}
+
+.errorBox p{
+    color: #fff;
+    font-size: 20px;
+}
 
 
 

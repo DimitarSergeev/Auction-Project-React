@@ -40,7 +40,12 @@ export const Create = ({userId}) => {
 
         auctionService.create({...data,owner:userId},userInfo.token)
             .then(() => navigate('/auction'))
-            .catch(error => console.log(error))
+            .catch(error => {
+                setErrors(state => ({
+                    ...state,
+                    error: error.message
+                }))
+            })
     }
 
     const validate = (e) => {
@@ -89,6 +94,11 @@ export const Create = ({userId}) => {
 
     return (
         <div id='create-form' className={styles['create-page']}>
+            {errors.error &&
+                <div className={styles.errorBox}>
+                    <p>{errors.error}</p>
+                </div>
+            }
             <div className={styles['form-box']}>
                 <h2 className={styles.title}>Make an Offer</h2>
                 <form onSubmit={submitHandler} className={styles['input-group-create']}>

@@ -1,5 +1,5 @@
 import styles from './Auction.module.css'
-import { useState ,useContext, useEffect } from "react";
+import { useState , useEffect } from "react";
 
 
 import { AuctionItem } from './AuctionItem';
@@ -26,7 +26,7 @@ export const Auction = () => {
             navigate('/404')
           })
     
-      }, [])
+      }, [navigate])
 
     let offertsS = offerts.filter(x => x.title.toLowerCase().includes(searchValue.toLowerCase()))
 
@@ -78,7 +78,7 @@ export const Auction = () => {
                 <div className={styles.cardHolder}>
                     {offerts.length > 0
                         ? offertsS.map(x => <AuctionItem key={x._id} auctionItem={x} />)
-                        : <h2>No Offerts for Now </h2>
+                        : <h2 className={styles.noOffers}>No Offerts for Now </h2>
                     }
                 </div>
 

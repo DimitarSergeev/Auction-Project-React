@@ -132,3 +132,13 @@
     color: aliceblue;
     font-size: 25px;
   }
+  .noOffers{
+    color: aliceblue;
+    margin-top: 170px;
+    /* padding: 20px; */
+    margin-bottom: 100px;
+    margin-right: 30px;
+    font-size: 50px;
+    background-color: rgb(51, 50, 51);
+    border-radius: 20px;
+  }

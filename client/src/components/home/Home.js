@@ -19,14 +19,14 @@ export const Home = () => {
                 navigate('/404')
             })
 
-    }, [])
+    }, [navigate])
 
     return (
         <div className={styles.box}>
             <h2 className={styles.title}>Last Deals :</h2>
             {lastOfferts.length > 0
                 ? lastOfferts.map(x => <HomeItem key={x._id} offer={x} />)
-                : <h2>No Offerts for Now </h2>
+                : <h2 className={styles.noOffers}>No Offerts for Now </h2>
             }
 
             <div className={styles['btn-box']}>

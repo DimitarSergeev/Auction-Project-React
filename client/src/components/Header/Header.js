@@ -25,23 +25,23 @@ export const Header = () => {
                     </NavLink>
                 </li>
                 <li className={styles.list}>
-                    <NavLink to='/auction' 
+                    <NavLink to='/auction'
                         className={({ isActive }) => (isActive ? styles.active : styles.text)}
                     >
                         Auction
                     </NavLink>
                 </li>
-                <li className={styles.list}>
-                    <NavLink to={`/auth/profile/${userInfo.userId}`}
-                        className={({ isActive }) => (isActive ? styles.active : styles.text)}
-                    >
-                       Profile
-                    </NavLink>
-                </li>
                 {userInfo.token
                     ? <>
                         <li className={styles.list}>
-                            <NavLink to='/offer/create' 
+                            <NavLink to={`/auth/profile/${userInfo.userId}`}
+                                className={({ isActive }) => (isActive ? styles.active : styles.text)}
+                            >
+                                Profile
+                            </NavLink>
+                        </li>
+                        <li className={styles.list}>
+                            <NavLink to='/offer/create'
                                 className={({ isActive }) => (isActive ? styles.active : styles.text)}
                             >
                                 Offer

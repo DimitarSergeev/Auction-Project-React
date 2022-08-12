@@ -24,6 +24,12 @@ export const EditItem = () => {
          .then(result => {
             setCurrOffer(result)
          })
+         .catch(error => {
+            setErrors(state => ({
+                ...state,
+                error: error.message
+            }))
+        })
     }, [offerId])
 
     const { userInfo } = useContext(AuthContext)
@@ -48,7 +54,12 @@ export const EditItem = () => {
         .then(()=>{
             navigate(`/offer/${currOffer._id}/details`)
         })
-        .catch(()=> navigate('/404'))
+        .catch(error => {
+            setErrors(state => ({
+                ...state,
+                error: error.message
+            }))
+        })
     }
 
     const validate = (e) => {
@@ -97,6 +108,11 @@ export const EditItem = () => {
 
     return (
         <div id='create-form' className={styles['create-page']}>
+             {errors.error &&
+                <div className={styles.errorBox}>
+                    <p>{errors.error}</p>
+                </div>
+            }
             <div className={styles['form-box']}>
                 <h2 className={styles.title}>Edit an Offer</h2>
                 <form onSubmit={submitHandler} className={styles['input-group-create']}>

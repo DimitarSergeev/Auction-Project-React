@@ -38,7 +38,7 @@ function App() {
         navigate('/404')
       })
 
-  }, [])
+  }, [navigate])
 
   const userLogin = (authData) => {
     setUserInfo(authData);

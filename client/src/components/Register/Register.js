@@ -26,7 +26,7 @@ export const Register = () => {
     const checkedHandler = (e) => {
         setUser(state => ({
             ...state,
-            [e.target.name]: !state[e.target.name] 
+            [e.target.name]: !state[e.target.name]
         }));
     }
     const submitHandler = (e) => {
@@ -35,9 +35,14 @@ export const Register = () => {
         if (allGood) {
             authService.register(user)
                 .then(navigate('/auth/login'))
-        } 
+                .catch(error => {
+                    setErrors(state => ({
+                        ...state,
+                        error: error.message
+                    }))
+                })
+        }
     }
-    console.log(user.needAge);
     const validate = (e) => {
         switch (e.target.name) {
             case 'email':
@@ -69,13 +74,19 @@ export const Register = () => {
                     ...state,
                     'needAge': user.needAge
                 }))
-                
+
                 break
+                default: break;
         }
     }
 
     return (
         <div onSubmit={submitHandler} className={styles['register-page']}>
+            {errors.error &&
+                <div className={styles.errorBox}>
+                    <p>{errors.error}</p>
+                </div>
+            }
             <div className={styles['form-box']}>
                 <div className={styles['button-box']}>
                     <NavLink className={({ isActive }) => isActive ? styles['active-btn'] : styles['toggle-btn']} to='/auth/login'>Login </NavLink>

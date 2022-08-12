@@ -25,13 +25,13 @@ export const DetailsPage = ({ userId, offerts }) => {
     }, [offerId])
 
     const currOffert1 = useMemo(() => offerts.find(x => x._id === offerId), [offerId, offerts])
-
     const timeData = Timer(currOffert1)
     const sendbet = () => {
         auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
             .then(result => {
                 setCurrOffer(result)
             })
+            .catch(() => navigate('/404'))
     }
 
     const addBet = (e) => {
@@ -99,6 +99,9 @@ export const DetailsPage = ({ userId, offerts }) => {
                         <> 
                         {winning &&
                             <label className={styles.winning}>You Leading </label>
+                        }
+                        {bet < (currOffer.startPrice + 10) &&
+                        <label className={styles.winning}>min bet is {currOffer.startPrice + 10} </label>
                         }
                         <div className={styles.btnBox}>
                             <div className={styles.bet}>
