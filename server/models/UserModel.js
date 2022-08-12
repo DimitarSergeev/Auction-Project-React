@@ -30,6 +30,7 @@ const userSchema = mongoose.Schema({
 })
 
 userSchema.pre('save', function (next) {
+    if (!this.isModified('password')) return next();
     bcrypt.hash(this.password, saltRounds)
         .then(hasedPassword => {
             this.password = hasedPassword

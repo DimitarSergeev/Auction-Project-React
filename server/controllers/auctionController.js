@@ -35,7 +35,7 @@ router.post('/offer/create', async (req, res) => {
     }
 })
 
-router.get('/offer/:offerId/details', async (req,res)=>{
+router.get('/offer/:offerId/details', async (req, res) => {
     try {
         const offert = await auctionService.getOne(req.params.offerId).lean()
         return res.json(offert)
@@ -45,21 +45,21 @@ router.get('/offer/:offerId/details', async (req,res)=>{
     }
 })
 
-router.patch('/:offerId', async (req,res)=>{
+router.patch('/:offerId', async (req, res) => {
     try {
         const offer = await auctionService.getOne(req.params.offerId)
         offer.startPrice = req.body.startPrice
         offer.winBet = req.body.winBet
         await offer.save()
         return res.json(offer)
-        
+
     } catch (error) {
         return res.json({ error: error.message })
     }
 })
-router.post('/edit/offer/:offerId',async (req,res)=>{
+router.post('/edit/offer/:offerId', async (req, res) => {
     let data = req.body
-    if (data.certificate === "No" && req.body.nameCert ) {
+    if (data.certificate === "No" && req.body.nameCert) {
         const { nameCert, ...corectData } = req.body
         data = corectData
     }
@@ -68,7 +68,7 @@ router.post('/edit/offer/:offerId',async (req,res)=>{
         return res.json({ error: 'The Authorization token has expired, please login !' })
     }
     try {
-        const editedOffer = await auctionService.edit(req.params.offerId,data)
+        const editedOffer = await auctionService.edit(req.params.offerId, data)
         return res.json(editedOffer)
     } catch (error) {
         res.status(400)
@@ -76,22 +76,23 @@ router.post('/edit/offer/:offerId',async (req,res)=>{
     }
 })
 
-router.get('/:offerId/:userId',async(req,res)=>{
+router.get('/:offerId/:userId', async (req, res) => {
     try {
         const offer = await auctionService.getOne(req.params.offerId)
         const user = await authService.getOne(req.params.userId)
         offer.owner = req.params.userId
-        offer.save()
+        await offer.save()
         user.Mycollection.push(offer)
-        user.save()
+        await user.save()
+        console.log(user);
         return res.json(user)
-        
+
     } catch (error) {
         return res.json({ error: error.message })
     }
 })
 
-router.get('/:offerId', async(req,res)=>{
+router.get('/:offerId', async (req, res) => {
     await auctionService.delete(req.params.offerId)
     return res.status(204)
 })

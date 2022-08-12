@@ -19,16 +19,16 @@ router.post('/login', async (req, res) => {
   try {
     const user = await authService.login(req.body)
     const token = await authService.createToken(user)
-    
+    console.log(user);
     return res.json({ userName: user.userName, token ,userId: user._id})
   } catch (error) {
     res.status(404)
     return res.json({ error: error.message })
   }
 })
-router.post('/profile',async(req,res)=>{
+router.get('/profile/:userId',async(req,res)=>{
   try {
-    const user = await authService.getOne(req.body)
+    const user = await authService.getOne(req.params.userId)
     return res.json(user)
   } catch (error) {
     return res.json({ error: error.message })

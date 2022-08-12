@@ -1,13 +1,13 @@
 import styles from './DetailsPage.module.css'
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useMemo } from 'react'
 
 import * as auctionService from '../../services/auctionService'
 import { Timer } from '../../util/timer';
 import { AuthContext } from '../../contexts/AuthContext';
 
-export const DetailsPage = ({ userId }) => {
+export const DetailsPage = ({ userId,offerts }) => {
     const { offerId } = useParams()
     const [currOffer, setCurrOffer] = useState({})
     const [bet, setBet] = useState(currOffer.startPrice)
@@ -23,9 +23,10 @@ export const DetailsPage = ({ userId }) => {
       } 
       set()
     }, [offerId])
+
+    const currOffert1 = useMemo(()=> offerts.find(x => x._id === offerId),[offerId,offerts]) 
     
-    
-    const timeData = Timer(currOffer)
+    const timeData = Timer(currOffert1)
     const sendbet = () => {
         auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
             .then(result => {
@@ -43,7 +44,7 @@ export const DetailsPage = ({ userId }) => {
                 auctionService.del(offerId)
                     .catch(() => navigate('/404'))
             })
-            .then(() => navigate('/about'))
+            .then(() => navigate(`/auth/profile/${userInfo.userId}`))
             .catch(() => navigate('/404'))
     }
 

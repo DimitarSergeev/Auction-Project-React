@@ -26,7 +26,15 @@ export const Timer = (item) => {
                 })
                 return () => clearInterval(intervalId)
             }
+            if (minutes < 10) {
+                minutes = `0${minutes}`
+            }
+            if(seconds < 10){
+               seconds = `0${seconds}`
+            }
+
             const time = { seconds, minutes, hours }
+
             setCurrentEndTime(oldcurrTime => oldcurrTime - 1000)
             setTimeData(time)
         }, 1000)

@@ -12,7 +12,7 @@ export const Register = () => {
         userName: '',
         password: '',
         repeatPassword: '',
-        needAge: ''
+        needAge: false
     })
 
     const navigate = useNavigate()
@@ -26,19 +26,18 @@ export const Register = () => {
     const checkedHandler = (e) => {
         setUser(state => ({
             ...state,
-            [e.target.name]: !e.target.value
+            [e.target.name]: !state[e.target.name] 
         }));
     }
     const submitHandler = (e) => {
         e.preventDefault()
         const allGood = Object.values(errors).some(x => x !== true)
         if (allGood) {
-            console.log(user);
             authService.register(user)
                 .then(navigate('/auth/login'))
         } 
     }
-    console.log(user);
+    console.log(user.needAge);
     const validate = (e) => {
         switch (e.target.name) {
             case 'email':
@@ -111,7 +110,7 @@ export const Register = () => {
 
 
                     <div className={styles.checkbox}>
-                        <input type="checkbox" id='18' name='needAge' value={user.needAge} onChange={checkedHandler} onBlur={(e) => validate(e)} />
+                        <input type="checkbox" id='18' name='needAge' checked={user.needAge} onChange={checkedHandler} onBlur={(e) => validate(e)} />
                         <label htmlFor="18" >I am 18 years old</label>
                     </div>
 

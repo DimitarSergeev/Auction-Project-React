@@ -51,13 +51,13 @@ function App() {
     <AuthContext.Provider value={{ userInfo, userLogin, userLogout }}>
 
       <div className="App">
-        <Header />
+        <Header userInfo={userInfo}/>
         <OfferContext.Provider value={{offerts}} >
           <main className='main'>
             <Routes>
-              <Route path='/profile' element={<Profile userInfo={userInfo}/>}/>
+              <Route path='/auth/profile/:userId' element={<Profile userInfo={userInfo}/>}/>
               <Route path='/404' element={<NotFound />} />
-              <Route path='/offer/:offerId/details' element={<DetailsPage userId={userInfo.userId}/>} />
+              <Route path='/offer/:offerId/details' element={<DetailsPage userId={userInfo.userId} offerts={offerts}/>} />
               <Route path='/auction' element={<Auction />} />
               <Route path='/' element={<Home />} />
               <Route path='/offer/create' element={<Create userId={userInfo.userId}/>} />

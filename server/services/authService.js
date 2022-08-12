@@ -7,7 +7,7 @@ const User = require('../models/UserModel')
 
 exports.getOne = (userId) => User.findById(userId)
 
-
+exports.findByUserName = (userName) => User.findOne({userName})
 exports.login = async ({ email, password }) => {
     const user = await User.findOne({ email })
     if (!user) {
@@ -16,12 +16,14 @@ exports.login = async ({ email, password }) => {
         })
     }
     let isValid = await bcrypt.compare(password, user.password)
+    // let isValid = await bcrypt.compare()
+    console.log(isValid);
     if (!isValid) {
         throw {
             message: 'email or password dont match!'
         };
     }
-
+    
     return user
 
 }

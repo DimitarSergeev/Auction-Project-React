@@ -37,16 +37,13 @@ export const login = async (userData) => {
     }
 }
 export const getOneUser = async(userId,token) =>{
-      const response = await fetch(`${baseUrl}/profile`,{
-        method: 'POST',
+      const response = await fetch(`${baseUrl}/profile/${userId}`,{
         headers: {
             'X-Authorization': token
         },
-        body: JSON.stringify(userId)
       })
       if (response.ok) {
         const result = await response.json();
-
         return result;
     } else {
         throw { message: 'User not found' };

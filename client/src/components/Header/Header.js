@@ -32,7 +32,7 @@ export const Header = () => {
                     </NavLink>
                 </li>
                 <li className={styles.list}>
-                    <NavLink to='/profile'
+                    <NavLink to={`/auth/profile/${userInfo.userId}`}
                         className={({ isActive }) => (isActive ? styles.active : styles.text)}
                     >
                        Profile
