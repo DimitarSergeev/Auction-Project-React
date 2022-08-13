@@ -8,7 +8,7 @@ import { OfferContext } from './contexts/OffertContext'
 import { useLocalStorage } from './hooks/userLocalStorage'
 
 import { Header } from './components/Header/Header'
-import { Footer } from './components/Footer/Footer'
+// import { Footer } from './components/Footer/Footer'
 import { Register } from './components/Register/Register'
 import { Login } from './components/Login/Login'
 import { Create } from './components/create/Create'
@@ -66,6 +66,7 @@ function App() {
               </Route>
 
               <Route path='/404' element={<NotFound />} />
+              <Route path='*' element={<NotFound />}/>
               <Route path='/offer/:offerId/details' element={<DetailsPage userId={userInfo.userId} offerts={offerts}/>} />
               <Route path='/auction' element={<Auction />} />
               <Route path='/' element={<Home />} />

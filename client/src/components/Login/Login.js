@@ -16,6 +16,8 @@ export const Login = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        const allGood = Object.values(errors).some(x => x !== true)
+        if (allGood) {
         authService.login(user)
             .then(result => {
                 userLogin(result)
@@ -27,6 +29,7 @@ export const Login = () => {
                     error: error.message
                 }))
             })
+        }
     }
 
     const validate = (e) => {

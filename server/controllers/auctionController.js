@@ -3,11 +3,13 @@ const router = require('express').Router()
 const tokenHelper = require('../utils/tokenHelper')
 const auctionService = require('../services/auctionService')
 const authService = require('../services/authService')
-const { default: mongoose } = require('mongoose')
 
 router.get('/', async (req, res) => {
     const offerts = await auctionService.getAll().lean()
     let firstIndex = offerts.length - 3
+    if (firstIndex < 0) {
+        firstIndex = 0
+    }
     const lastTree = offerts.slice(firstIndex)
     return res.json(lastTree)
 })
@@ -69,7 +71,7 @@ router.post('/edit/offer/:offerId', async (req, res) => {
         return res.json({ error: 'The Authorization token has expired, please login !' })
     }
     try {
-        const editedOffer = await auctionService.edit(req.params.offerId, data)
+        const editedOffer = await auctionService.edit(req.params.offerId, data).lean()
         return res.json(editedOffer)
     } catch (error) {
         res.status(400)
@@ -81,6 +83,9 @@ router.get('/:offerId/:userId', async (req, res) => {
     try {
         const offer = await auctionService.getOne(req.params.offerId)
         const user = await authService.getOne(req.params.userId)
+        if (offer.winBet) {
+            offer.buyNow = offer.startPrice
+        }
         offer.owner = req.params.userId
         await offer.save()
         user.Mycollection.push(offer)

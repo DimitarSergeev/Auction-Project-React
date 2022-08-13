@@ -49,17 +49,20 @@ export const EditItem = () => {
     }
     const submitHandler = (e) => {
         e.preventDefault()
+        const allGood = Object.values(errors).some(x => x !== true)
         const data = Object.fromEntries(new FormData(e.target))
-        auctionService.edit(currOffer._id,userInfo.token,{...data,owner: currOffer.owner,timer: currOffer.timer})
-        .then(()=>{
-            navigate(`/offer/${currOffer._id}/details`)
-        })
-        .catch(error => {
-            setErrors(state => ({
-                ...state,
-                error: error.message
-            }))
-        })
+        if (allGood) {
+            auctionService.edit(currOffer._id,userInfo.token,{...data,owner: currOffer.owner,timer: currOffer.timer})
+            .then(()=>{
+                navigate(`/offer/${currOffer._id}/details`)
+            })
+            .catch(error => {
+                setErrors(state => ({
+                    ...state,
+                    error: error.message
+                }))
+            })
+        }
     }
 
     const validate = (e) => {
@@ -167,7 +170,7 @@ export const EditItem = () => {
                         }
                     </div>
 
-                    <button type='submit' className={styles['submit-btn']}>C r e a t e</button>
+                    <button type='submit' className={styles['submit-btn']}>E D I T</button>
                 </form>
             </div>
         </div>

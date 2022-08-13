@@ -32,12 +32,12 @@ export const Create = ({userId}) => {
         haveCertificate = true
     } else {
         haveCertificate = false
-        
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
-
+        const allGood = Object.values(errors).some(x => x !== true)
+        if (allGood) {
         auctionService.create({...data,owner:userId},userInfo.token)
             .then(() => navigate('/auction'))
             .catch(error => {
@@ -46,6 +46,7 @@ export const Create = ({userId}) => {
                     error: error.message
                 }))
             })
+        }
     }
 
     const validate = (e) => {

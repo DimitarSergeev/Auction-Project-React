@@ -27,11 +27,13 @@ export const DetailsPage = ({ userId, offerts }) => {
     const currOffert1 = useMemo(() => offerts.find(x => x._id === offerId), [offerId, offerts])
     const timeData = Timer(currOffert1)
     const sendbet = () => {
-        auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
-            .then(result => {
-                setCurrOffer(result)
-            })
-            .catch(() => navigate('/404'))
+        if (bet > currOffer.startPrice + 10) {
+            auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
+                .then(result => {
+                    setCurrOffer(result)
+                })
+                .catch(() => navigate('/404'))
+        }
     }
 
     const addBet = (e) => {
