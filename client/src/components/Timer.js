@@ -41,6 +41,7 @@ export const Timer = ({ item, styles }) => {
             }
 
             if (hours < 1 && minutes < 1 && seconds < 1) {
+                console.log('im here');
                 if (item.winBet) {
                     auctionService.buyNow(item._id, item.winBet)
                         .then(() => {

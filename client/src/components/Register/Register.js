@@ -35,7 +35,9 @@ export const Register = () => {
         const allGood = Object.values(errors).some(x => x !== true)
         if (allGood && user.needAge) {
             authService.register(user)
-                .then(navigate('/auth/login'))
+                .then( ()=>{ 
+                    navigate('/auth/login')
+                })
                 .catch(error => {
                     setErrors(state => ({
                         ...state,

@@ -31,7 +31,6 @@ export const EditItem = () => {
             }))
         })
     }, [offerId])
-
     const { userInfo } = useContext(AuthContext)
     const navigate = useNavigate()
     const changeHandler = (e) => {
@@ -45,18 +44,19 @@ export const EditItem = () => {
         haveCertificate = true
     } else {
         haveCertificate = false
-
     }
     const submitHandler = (e) => {
         e.preventDefault()
         const allGood = Object.values(errors).some(x => x !== true)
         const data = Object.fromEntries(new FormData(e.target))
+        console.log(allGood);
         if (allGood) {
             auctionService.edit(currOffer._id,userInfo.token,{...data,owner: currOffer.owner,timer: currOffer.timer})
             .then(()=>{
                 navigate(`/offer/${currOffer._id}/details`)
             })
             .catch(error => {
+                console.log('im here');
                 setErrors(state => ({
                     ...state,
                     error: error.message

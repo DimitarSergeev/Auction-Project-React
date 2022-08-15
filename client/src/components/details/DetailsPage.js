@@ -22,7 +22,7 @@ export const DetailsPage = ({ userId, offerts }) => {
                 })
         }
         set()
-    }, [offerId,currOffer])
+    }, [offerId])
 
     if (currOffer.timer === undefined) {
         return
@@ -62,7 +62,7 @@ export const DetailsPage = ({ userId, offerts }) => {
     }
     let certificate = ''
     let winning = ''
-    if (currOffer.nameCert) {
+    if (currOffer.certificate === 'Yes') {
         certificate = currOffer.nameCert
     } else {
         certificate = currOffer.certificate

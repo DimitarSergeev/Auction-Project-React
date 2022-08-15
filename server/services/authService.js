@@ -28,11 +28,10 @@ exports.login = async ({ email, password }) => {
 }
 
 exports.register = async ({ email, userName, password, repeatPassword }) => {
-
     if (password !== repeatPassword) {
-        throw ({
+        throw {
             message: 'Passwords dont match!'
-        })
+        }
     }
 
 
