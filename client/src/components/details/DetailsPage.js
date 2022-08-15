@@ -1,7 +1,7 @@
 import styles from './DetailsPage.module.css'
 
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useState, useEffect, useContext, useMemo } from 'react'
+import { useState, useEffect, useContext } from 'react'
 
 import * as auctionService from '../../services/auctionService'
 import { Timer } from '../../util/timer';
@@ -22,10 +22,12 @@ export const DetailsPage = ({ userId, offerts }) => {
                 })
         }
         set()
-    }, [offerId])
+    }, [offerId,currOffer])
 
-    const currOffert1 = useMemo(() => offerts.find(x => x._id === offerId), [offerId, offerts])
-    const timeData = Timer(currOffert1)
+    if (currOffer.timer === undefined) {
+        return
+    }
+
     const sendbet = () => {
         if (bet > currOffer.startPrice + 10) {
             auctionService.bet(offerId, { startPrice: bet, token: userInfo.token, winBet: userInfo.userId })
@@ -65,16 +67,16 @@ export const DetailsPage = ({ userId, offerts }) => {
     } else {
         certificate = currOffer.certificate
     }
-    
+
     if (currOffer.winBet === userInfo.userId) {
         winning = true
     } else {
         winning = false
     }
     let timeEnd = false
-    if (timeData.hours.includes('-')) {
-        timeEnd = true
-    }
+    // if (timeData.hours.includes('-')) {
+    //     timeEnd = true
+    // }
     let isOwner = currOffer.owner === userId && !timeEnd
 
     return (
@@ -90,30 +92,28 @@ export const DetailsPage = ({ userId, offerts }) => {
                 </div>
                 {timeEnd
                     ? <p className={styles.notSold}>This item is no avalible ! </p>
-                    : <> <div className={styles.time}>
-                        <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
-                        <span>{timeData.seconds}</span>
-                    </div>
+                    : <> <Timer item={currOffer} styles={styles} />
+                    
                         <div className={styles.certificate}>
                             <span>Certificate: {certificate} </span>
                         </div>
-                        {userInfo.token && 
-                        <> 
-                        {winning &&
-                            <label className={styles.winning}>You Leading </label>
-                        }
-                        <div className={styles.btnBox}>
-                            <div className={styles.bet}>
-                                <input type="number" placeholder={`Min ${currOffer.startPrice +10} $`} onChange={addBet} onBlur={(e)=> e.target.value = ''}/>
-                                <button onClick={() => sendbet()}>Bet</button>
-                            </div>
-                        </div>
-                        {bet < (currOffer.startPrice + 10) &&
-                        <p className={styles.minBet}>min bet is {currOffer.startPrice +10} </p>
-                        }
+                        {userInfo.token &&
+                            <>
+                                {winning &&
+                                    <label className={styles.winning}>You Leading </label>
+                                }
+                                <div className={styles.btnBox}>
+                                    <div className={styles.bet}>
+                                        <input type="number" placeholder={`Min ${currOffer.startPrice + 10} $`} onChange={addBet} onBlur={(e) => e.target.value = ''} />
+                                        <button onClick={() => sendbet()}>Bet</button>
+                                    </div>
+                                </div>
+                                {bet < (currOffer.startPrice + 10) &&
+                                    <p className={styles.minBet}>min bet is {currOffer.startPrice + 10} </p>
+                                }
 
-                        <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
-                        </>
+                                <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
+                            </>
                         }
                     </>
                 }
@@ -133,11 +133,11 @@ export const DetailsPage = ({ userId, offerts }) => {
                     <p>
                         {currOffer.description}
                     </p>
-                    {isOwner && 
-                            <div className={styles.ownerBtn}>
-                                <Link to={`/edit/offer/${currOffer._id}`} className={styles.edit}>Edit</Link>
-                                <button className={styles.delete} onClick={() => deleteItem()}>Delete</button>
-                            </div>
+                    {isOwner &&
+                        <div className={styles.ownerBtn}>
+                            <Link to={`/edit/offer/${currOffer._id}`} className={styles.edit}>Edit</Link>
+                            <button className={styles.delete} onClick={() => deleteItem()}>Delete</button>
+                        </div>
                     }
                 </div>
             </div>

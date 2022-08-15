@@ -99,6 +99,7 @@ router.get('/:offerId/:userId', async (req, res) => {
 
 router.get('/:offerId', async (req, res) => {
     await auctionService.delete(req.params.offerId)
+    console.log('delete');
     return res.status(204)
 })
 module.exports = router

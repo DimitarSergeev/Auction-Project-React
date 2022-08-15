@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as auctionService from '../../services/auctionService'
 import { HomeItem } from './HomeItem';
 
+
 import { Link, useNavigate } from 'react-router-dom'
 export const Home = () => {
     const [lastOfferts, setLastOfferts] = useState([])

@@ -3,21 +3,19 @@ import { Link } from 'react-router-dom';
 
 import { Timer } from '../../util/timer';
 export const HomeItem = ({ offer }) => {
-    const timeData = Timer(offer)
-    let timeEnd = false
-    if (timeData.hours.includes('-')) {
-        timeEnd = true
-    }
+    // const timeData = Timer(offer)
+    // let timeEnd = false
+    // if (timeData.hours.includes('-')) {
+    //     timeEnd = true
+    // }
+    const timeEnd = false
     return (
         <div className={styles.card}>
             <img src={offer.imageUrl} alt="nqma" />
             <div className={styles['card-text']}>
                 {timeEnd
                     ? <p>Not Sold!</p>
-                    : <div className={styles.time}>
-                        <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
-                        <span>{timeData.seconds}</span>
-                    </div>
+                    : <Timer item={offer} styles={styles}/>
                 }
 
                 <h2>{offer.title}</h2>

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { Timer } from '../../util/timer';
 
 export const AuctionItem = ({ auctionItem }) => {
-    const timeData = Timer(auctionItem)
+    // const timeData = Timer(auctionItem)
     let timeEnd = false
-    if (timeData.hours.includes('-')) {
-        timeEnd = true
-    }
+    // if (timeData.hours.includes('-')) {
+    //     timeEnd = true
+    // }
 
     return (
         <div className={styles.card}>
@@ -15,10 +15,7 @@ export const AuctionItem = ({ auctionItem }) => {
             <div className={styles['card-text']}>
                 {timeEnd
                     ? <p>Not Sold</p>
-                    : <div className={styles.time}>
-                        <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
-                        <span>{timeData.seconds}</span>
-                    </div>
+                    :<Timer item={auctionItem} styles={styles}/>
                 }
 
                 <h2>{auctionItem.title}</h2>

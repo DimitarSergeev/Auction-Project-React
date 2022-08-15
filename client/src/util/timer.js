@@ -2,19 +2,20 @@ import { useEffect, useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as auctionService from '../services/auctionService'
-export const Timer = (item) => {
+export const Timer = ({item,styles}) => {
     const [timeData, setTimeData] = useState({
         seconds: '',
         minutes: '',
         hours: ''
     })
     const navigate = useNavigate()
-    
+
+
     let currEndDate = Date.parse(item.timer)
     const [currentEdnTime, setCurrentEndTime] = useState(currEndDate)
     useEffect(() => {
         const intervalId = setInterval(() => {
-            let leftTime = 600000- (Date.now() - currentEdnTime)
+            let leftTime = 600000 - (Date.now() - currentEdnTime)
             let seconds = Math.floor(leftTime / 1000)
             let minutes = Math.floor(seconds / 60)
             let hours = Math.floor(minutes / 60)
@@ -50,13 +51,8 @@ export const Timer = (item) => {
                         .catch(() => navigate('/404'))
                 } else {
                     auctionService.del(item._id)
-                        .then(() => setTimeData({
-                            seconds: '00',
-                            minutes: '00',
-                            hours: '25'
-                        })
-                        )
                         .catch(() => navigate('/404'))
+                        console.log('delete');
                 }
                 return timeData
             }
@@ -67,6 +63,11 @@ export const Timer = (item) => {
             setTimeData(time)
         }, 1000)
         return () => clearInterval(intervalId)
-    }, [currentEdnTime, item._id, item.winBet, navigate,timeData])
-    return timeData
+    }, [currentEdnTime, item._id, item.winBet, navigate, timeData])
+    return (
+        <div className={styles.time}>
+            <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:
+            <span>{timeData.seconds}</span>
+        </div>
+    )
 }
