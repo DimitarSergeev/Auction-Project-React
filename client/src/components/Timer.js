@@ -2,7 +2,7 @@ import { useEffect, useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as auctionService from '../services/auctionService'
-export const Timer = ({item,styles}) => {
+export const Timer = ({ item, styles }) => {
     const [timeData, setTimeData] = useState({
         seconds: '',
         minutes: '',
@@ -52,9 +52,9 @@ export const Timer = ({item,styles}) => {
                 } else {
                     auctionService.del(item._id)
                         .catch(() => navigate('/404'))
-                        console.log('delete');
                 }
-                return timeData
+                navigate('/')
+                return clearInterval(intervalId)
             }
 
             const time = { seconds, minutes, hours }
@@ -64,6 +64,8 @@ export const Timer = ({item,styles}) => {
         }, 1000)
         return () => clearInterval(intervalId)
     }, [currentEdnTime, item._id, item.winBet, navigate, timeData])
+
+
     return (
         <div className={styles.time}>
             <span>{timeData.hours}</span>:<span>{timeData.minutes}</span>:

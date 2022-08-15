@@ -29,10 +29,11 @@ export const Register = () => {
             [e.target.name]: !state[e.target.name]
         }));
     }
+    
     const submitHandler = (e) => {
         e.preventDefault()
         const allGood = Object.values(errors).some(x => x !== true)
-        if (allGood) {
+        if (allGood && user.needAge) {
             authService.register(user)
                 .then(navigate('/auth/login'))
                 .catch(error => {
@@ -72,7 +73,7 @@ export const Register = () => {
             case 'needAge':
                 setErrors(state => ({
                     ...state,
-                    'needAge': user.needAge
+                    'needAge': user.needAge === false ? true : false
                 }))
 
                 break

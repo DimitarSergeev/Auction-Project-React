@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 
 import * as auctionService from '../../services/auctionService'
-import { Timer } from '../../util/timer';
+import { Timer } from '../Timer';
 import { AuthContext } from '../../contexts/AuthContext';
 
 export const DetailsPage = ({ userId, offerts }) => {
@@ -73,11 +73,8 @@ export const DetailsPage = ({ userId, offerts }) => {
     } else {
         winning = false
     }
-    let timeEnd = false
-    // if (timeData.hours.includes('-')) {
-    //     timeEnd = true
-    // }
-    let isOwner = currOffer.owner === userId && !timeEnd
+   
+    let isOwner = currOffer.owner === userId 
 
     return (
         <div className={styles.box}>
@@ -90,9 +87,7 @@ export const DetailsPage = ({ userId, offerts }) => {
                         alt='ne'
                     />
                 </div>
-                {timeEnd
-                    ? <p className={styles.notSold}>This item is no avalible ! </p>
-                    : <> <Timer item={currOffer} styles={styles} />
+                <Timer item={currOffer} styles={styles} />
                     
                         <div className={styles.certificate}>
                             <span>Certificate: {certificate} </span>
@@ -115,8 +110,7 @@ export const DetailsPage = ({ userId, offerts }) => {
                                 <button className={styles.buyNow} onClick={() => buyNowhandler()}>Buy Now {currOffer.buyNow}$</button>
                             </>
                         }
-                    </>
-                }
+                
 
 
                 <div className={styles.right}>

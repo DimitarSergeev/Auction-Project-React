@@ -17,7 +17,6 @@ exports.login = async ({ email, password }) => {
     }
     let isValid = await bcrypt.compare(password, user.password)
     // let isValid = await bcrypt.compare()
-    console.log(isValid);
     if (!isValid) {
         throw {
             message: 'email or password dont match!'
@@ -31,9 +30,9 @@ exports.login = async ({ email, password }) => {
 exports.register = async ({ email, userName, password, repeatPassword }) => {
 
     if (password !== repeatPassword) {
-        throw {
+        throw ({
             message: 'Passwords dont match!'
-        }
+        })
     }
 
 

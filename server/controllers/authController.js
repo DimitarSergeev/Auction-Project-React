@@ -4,11 +4,10 @@ const authService = require('../services/authService')
 const {sessionName} = require('../config/env')
 // const tokenHelper = require('../utils/tokenHelper')
 router.post('/register', async (req, res) => {
-
   try {
     const user = await authService.register(req.body)
     return res.json(user)
-
+    
   } catch (error) {
     res.status(400)
 

@@ -1,22 +1,15 @@
 import styles from './Auction.module.css'
 import { Link } from 'react-router-dom'
-import { Timer } from '../../util/timer';
+import { Timer } from '../Timer';
 
 export const AuctionItem = ({ auctionItem }) => {
-    // const timeData = Timer(auctionItem)
-    let timeEnd = false
-    // if (timeData.hours.includes('-')) {
-    //     timeEnd = true
-    // }
 
     return (
         <div className={styles.card}>
             <img src={auctionItem.imageUrl} alt="nqma" />
             <div className={styles['card-text']}>
-                {timeEnd
-                    ? <p>Not Sold</p>
-                    :<Timer item={auctionItem} styles={styles}/>
-                }
+               <Timer item={auctionItem} styles={styles}/>
+            
 
                 <h2>{auctionItem.title}</h2>
             </div>
@@ -25,11 +18,11 @@ export const AuctionItem = ({ auctionItem }) => {
                 <div className={styles.stat}>
                     <div className={styles.value}>{auctionItem.startPrice} $</div>
                 </div>
-                {!timeEnd &&
+                
                 <div className={styles.detailBox}>
                     <Link to={`/offer/${auctionItem._id}/details`} className={styles.details}>See More</Link>
                 </div>
-                }
+                
             </div>
         </div>
     )
