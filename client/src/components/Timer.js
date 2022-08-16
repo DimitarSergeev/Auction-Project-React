@@ -1,4 +1,4 @@
-import { useEffect, useState, } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import * as auctionService from '../services/auctionService'
@@ -12,10 +12,9 @@ export const Timer = ({ item, styles }) => {
 
 
     let currEndDate = Date.parse(item.timer)
-    const [currentEdnTime, setCurrentEndTime] = useState(currEndDate)
     useEffect(() => {
         const intervalId = setInterval(() => {
-            let leftTime = 600000 - (Date.now() - currentEdnTime)
+            let leftTime = 6000 - (Date.now() - currEndDate)
             let seconds = Math.floor(leftTime / 1000)
             let minutes = Math.floor(seconds / 60)
             let hours = Math.floor(minutes / 60)
@@ -40,7 +39,7 @@ export const Timer = ({ item, styles }) => {
                 hours = `0${hours}`
             }
 
-            if (hours < 1 && minutes < 1 && seconds < 1) {
+            if ((hours < 1 && minutes < 1 && seconds < 1) || leftTime < 0) {
                 console.log('im here');
                 if (item.winBet) {
                     auctionService.buyNow(item._id, item.winBet)
@@ -60,11 +59,10 @@ export const Timer = ({ item, styles }) => {
 
             const time = { seconds, minutes, hours }
 
-            setCurrentEndTime(oldcurrTime => oldcurrTime)
             setTimeData(time)
         }, 1000)
         return () => clearInterval(intervalId)
-    }, [currentEdnTime, item._id, item.winBet, navigate, timeData])
+    }, [currEndDate, item._id, item.winBet, navigate, timeData])
 
 
     return (

@@ -47,7 +47,7 @@ export const EditItem = () => {
     }
     const submitHandler = (e) => {
         e.preventDefault()
-        const allGood = Object.values(errors).some(x => x !== true)
+        const allGood = Object.values(errors).some(x => x !== true) || true
         const data = Object.fromEntries(new FormData(e.target))
         console.log(allGood);
         if (allGood) {

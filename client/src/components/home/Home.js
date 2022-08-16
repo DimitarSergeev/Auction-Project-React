@@ -21,7 +21,7 @@ export const Home = () => {
             })
 
     }, [navigate])
-
+    
     return (
         <div className={styles.box}>
             <h2 className={styles.title}>Last Deals :</h2>
